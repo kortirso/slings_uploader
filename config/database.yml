@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  port: 5432
+  username: <%= ENV['UPLOADER_DATABASE_USERNAME'] %>
+  password: <%= ENV['UPLOADER_DATABASE_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: uploader_development
+
+test:
+  <<: *default
+  database: uploader_test
+
+production:
+  <<: *default
+  database: uploader_production
