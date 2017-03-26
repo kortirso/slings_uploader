@@ -23,6 +23,10 @@ gem 'trix'
 gem 'carrierwave', '~> 1.0'
 gem 'rmagick'
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-vkontakte'
+
 group :development do
     gem 'listen', '~> 3.0.5'
     gem 'spring'

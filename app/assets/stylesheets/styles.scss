@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans&subset=cyrillic');
+
+* {
+    font-family: 'PT Sans';
+    font-size: 16px;
+}
+
+#auth_block {
+    margin-top: 100px;
+    padding: 15px;
+    background: #FFF;
+    box-shadow: 0 4px 6px 2px #AAA;
+    text-align: center;
+    .social {
+        width: 32px;
+    }
+}
