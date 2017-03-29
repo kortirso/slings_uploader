@@ -1,0 +1,11 @@
+nav
+    .title-bar data-responsive-toggle="example-menu"
+        button.menu-icon type="button" data-toggle="example-menu"
+        .title-bar-title Меню
+    .top-bar#example-menu
+        .top-bar-left
+            ul.menu.dropdown.vertical.medium-horizontal data-dropdown-menu=""
+                li= link_to 'Главная', root_path
+                li= link_to 'Каталог товаров', categories_path
+                li= link_to 'Настройки', current_user
+                li= link_to 'Выход', destroy_user_session_path, method: :delete

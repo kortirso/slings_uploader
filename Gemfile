@@ -22,6 +22,8 @@ gem 'slim'
 gem 'trix'
 gem 'carrierwave', '~> 1.0'
 gem 'rmagick'
+gem 'friendly_id', '~> 5.1.0'
+gem 'babosa'
 
 gem 'devise'
 gem 'omniauth'

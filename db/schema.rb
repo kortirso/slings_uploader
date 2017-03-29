@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326073532) do
+ActiveRecord::Schema.define(version: 20170329112825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       default: "", null: false
+    t.string   "slug"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+  end
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -22,6 +42,19 @@ ActiveRecord::Schema.define(version: 20170326073532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name",        default: "", null: false
+    t.string   "caption"
+    t.integer  "price",       default: 0,  null: false
+    t.string   "slug"
+    t.integer  "category_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "image"
+    t.index ["category_id"], name: "index_products_on_category_id", using: :btree
+    t.index ["slug"], name: "index_products_on_slug", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|

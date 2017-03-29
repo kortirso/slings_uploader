@@ -6,5 +6,5 @@ html
         = javascript_include_tag 'application'
         = csrf_meta_tags
     body
-        = link_to 'Выход', destroy_user_session_path, method: :delete if user_signed_in?
+        = render 'shared/navigation'
         = yield

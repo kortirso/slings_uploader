@@ -15,3 +15,13 @@
         width: 32px;
     }
 }
+
+.menu {
+    li {
+        a {
+            &.active {
+                text-decoration: underline;
+            }
+        }
+    }
+}
