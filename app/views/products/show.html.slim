@@ -1,4 +1,8 @@
 = render 'shared/categories_navigation'
-p= @product.name
-p= @product.caption
-p= "#{@product.price} руб."
+.row
+    .columns.small-12
+        p= @product.name
+        p= @product.caption
+        p= "#{@product.price} руб."
+
+        = link_to 'Опубликовать', products_path(product_id: @product.id), class: 'button', method: :post, remote: true

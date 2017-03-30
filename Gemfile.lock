@@ -282,6 +282,7 @@ DEPENDENCIES
   friendly_id (~> 5.1.0)
   jquery-rails
   listen (~> 3.0.5)
+  multipart-post
   omniauth
   omniauth-vkontakte
   pg (~> 0.18)

@@ -30,6 +30,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-vkontakte'
 
+gem 'multipart-post'
+
 group :development do
     gem 'listen', '~> 3.0.5'
     gem 'spring'
