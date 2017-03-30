@@ -2,6 +2,10 @@ class User < ApplicationRecord
     devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:vkontakte]
 
     has_many :identities
+    has_one :site
+    has_one :vk_group
+
+    after_create :create_sites_objects
 
     def self.find_for_oauth(auth)
         identity = Identity.find_for_oauth(auth)
@@ -19,5 +23,12 @@ class User < ApplicationRecord
         user.identities.create(provider: auth.provider, uid: auth.uid)
 
         user
+    end
+
+    private
+
+    def create_sites_objects
+        Site.create user: self
+        VkGroup.create user: self
     end
 end
