@@ -24,6 +24,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'rmagick'
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
+gem 'simple_form'
 
 gem 'devise'
 gem 'omniauth'

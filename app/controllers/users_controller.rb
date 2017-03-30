@@ -6,7 +6,8 @@ class UsersController < ApplicationController
     end
 
     def show
-
+        @vk_group = current_user.vk_group
+        @vk_group.albums.build
     end
 
     private

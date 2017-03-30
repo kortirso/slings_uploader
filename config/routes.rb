@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     resources :categories, only: [:index, :show]
     resources :products, only: :show
+    resources :vk_groups, only: :update
 
     get 'welcome' => 'welcome#index', as: :welcome
 

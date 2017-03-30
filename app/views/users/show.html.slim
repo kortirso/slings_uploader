@@ -1,0 +1,9 @@
+.row
+    .columns.small-12.medium-3
+        p Настройки группы ВК
+        = simple_form_for @vk_group, url: vk_group_path(@vk_group), method: :patch, remote: true do |f|
+            = f.input :group_id, placeholder: 'Идентификатор группы', label: false
+            p Добавить/Редактировать альбомы
+            = f.simple_fields_for :albums do |y|
+                = y.input :vk_id, placeholder: 'Идентификатор альбома', label: false
+            = f.button :submit, value: 'Сохранить'
