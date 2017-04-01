@@ -30,7 +30,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-vkontakte'
 
-gem 'multipart-post'
+gem 'rest-client'
 
 group :development do
     gem 'listen', '~> 3.0.5'
