@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     end
 
     def create
-        PublishService.new({user: current_user, product_name: params[:product_id]}).publish
+        ProductPublishingJob.perform_later({user: current_user, product_name: params[:product_id]})
         head :ok
     end
 end

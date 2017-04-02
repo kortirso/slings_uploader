@@ -305,6 +305,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   shoulda-matchers
+  sidekiq (>= 4.2.10)
   simple_form
   slim
   spring

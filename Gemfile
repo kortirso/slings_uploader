@@ -29,8 +29,8 @@ gem 'simple_form'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-vkontakte'
-
 gem 'rest-client'
+gem 'sidekiq', '>= 4.2.10'
 
 group :development do
     gem 'listen', '~> 3.0.5'
