@@ -5,6 +5,17 @@
     font-size: 16px;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    .inside {
+        margin: 20px auto;
+    }
+}
+
 #auth_block {
     margin-top: 100px;
     padding: 15px;
@@ -23,5 +34,34 @@
                 text-decoration: underline;
             }
         }
+    }
+}
+
+.block {
+    box-shadow: 0 4px 6px 2px #AAA;
+    padding: 15px;
+    .button {
+        margin: 0;
+    }
+    h5 {
+        text-align: center;
+    }
+}
+
+.product_block {
+    div {
+        margin-bottom: 5px;
+    }
+    .product_image {
+        height: 200px;
+        img {
+            height: 100%;
+        }
+    }
+}
+
+.publish_block {
+    textarea {
+        height: 125px;
     }
 }

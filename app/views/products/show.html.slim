@@ -1,14 +1,20 @@
 = render 'shared/categories_navigation'
 .row
-    .columns.small-12
-        p= @product.name
-        p= @product.caption
-        p= "#{@product.price} руб."
-        - if @publish.present?
-            h5 Данные о публикации
-            p= @publish.name
-            p= @publish.caption
-            p= "#{@publish.price} руб."
-            = link_to 'Редактировать публикацию', product_publish_path(@product, @publish), class: 'button'
-        - else
-            = link_to 'Подготовить публикацию', product_publishes_path(@product), class: 'button', method: :post
+    .columns.small-12.medium-6
+        .block.product_block
+            h5 Данные ТМ Слингуля
+            .product_name= @product.name
+            .product_image= image_tag @product.image
+            .product_caption= @product.caption
+            .product_price= "#{@product.price} руб."
+    .columns.small-12.medium-6
+        .block.product_block
+            h5 Данные в публикации
+            - if @publish.present?
+                .product_name= @publish.name
+                .product_image= image_tag @publish.image
+                .product_caption= @publish.caption
+                .product_price= "#{@publish.price} руб."
+                = link_to 'Редактировать публикацию', product_publish_path(@product, @publish), class: 'button'
+            - else
+                = link_to 'Подготовить публикацию', product_publishes_path(@product), class: 'button', method: :post
