@@ -2,4 +2,4 @@
 .row
     .columns.small-12
         - @products.each do |product|
-            p= link_to product.name, product
+            p= link_to "#{product.name}#{' (Опубликовано)' if product.publishes.for_user(current_user).present?}", product

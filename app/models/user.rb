@@ -2,8 +2,11 @@ class User < ApplicationRecord
     devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:vkontakte]
 
     has_many :identities
+    has_many :publishes
+    
     has_one :site
     has_one :vk_group
+    has_many :albums, through: :vk_group
 
     after_create :create_sites_objects
 

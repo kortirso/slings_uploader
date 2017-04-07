@@ -1,12 +1,8 @@
 class ProductsController < ApplicationController
-    before_action :get_categories, only: :show
+    before_action :get_categories
 
     def show
         @product = Product.friendly.find(params[:id])
-    end
-
-    def create
-        ProductPublishingJob.perform_later({user: current_user, product_name: params[:product_id]})
-        head :ok
+        @publish = @product.publishes.find_by(user_id: current_user.id)
     end
 end

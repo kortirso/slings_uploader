@@ -1,0 +1,9 @@
+.row
+    .columns.small-12.medium-6
+        p= "Публикация товара #{@publish.name}"
+        = simple_form_for @publish, url: product_publish_path(@publish.product, @publish), method: :patch, remote: true do |f|
+            = f.input :name, placeholder: 'Идентификатор группы', value: @publish.name, label: 'Название'
+            = f.input :caption, placeholder: 'Идентификатор группы', value: @publish.caption, label: 'Описание'
+            = f.input :price, placeholder: 'Идентификатор группы', value: @publish.price, label: 'Цена'
+            = f.select :album_id, options_for_select(@albums), value: @publish.album.try(:album_id)
+            = f.button :submit, value: 'Опубликовать'

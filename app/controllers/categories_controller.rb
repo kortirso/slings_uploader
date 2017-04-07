@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
     before_action :get_categories
 
     def index
-        @products = Product.order(id: :desc)
+        @products = Product.order(id: :desc).includes(:publishes)
     end    
 
     def show

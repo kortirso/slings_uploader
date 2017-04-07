@@ -4,4 +4,11 @@
         p= @product.name
         p= @product.caption
         p= "#{@product.price} руб."
-        = link_to 'Опубликовать', products_path(product_id: @product.id), class: 'button', method: :post, remote: true
+        - if @publish.present?
+            h5 Данные о публикации
+            p= @publish.name
+            p= @publish.caption
+            p= "#{@publish.price} руб."
+            = link_to 'Редактировать публикацию', product_publish_path(@product, @publish), class: 'button'
+        - else
+            = link_to 'Подготовить публикацию', product_publishes_path(@product), class: 'button', method: :post
