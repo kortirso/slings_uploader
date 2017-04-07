@@ -15,7 +15,7 @@ class PublishProductsService
     private
 
     def get_upload_url
-        response = VK::Photos::GetUploadServerService.call({token: user.token, album_id: user.vk_group.albums.first.vk_id, group_id: user.vk_group.group_id})
+        response = VK::Photos::GetUploadServerService.call({token: user.token, album_id: user.vk_group.albums.first.album_id, group_id: user.vk_group.group_id})
         @upload_url = response['response']['upload_url']
     end
 
@@ -24,6 +24,6 @@ class PublishProductsService
     end
 
     def save_image
-        VK::Photos::SaveService.call({token: user.token, album_id: user.vk_group.albums.first.vk_id, group_id: user.vk_group.group_id, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash']})
+        VK::Photos::SaveService.call({token: user.token, album_id: user.vk_group.albums.first.album_id, group_id: user.vk_group.group_id, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash']})
     end
 end
