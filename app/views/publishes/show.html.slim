@@ -3,8 +3,12 @@
         .block.publish_block
             h5= "Публикация товара #{@publish.name}"
             = simple_form_for @publish, url: product_publish_path(@publish.product, @publish), method: :patch, remote: true do |f|
-                = f.input :name, placeholder: 'Идентификатор группы', value: @publish.name, label: 'Название'
-                = f.input :caption, placeholder: 'Идентификатор группы', value: @publish.caption, label: 'Описание'
-                = f.input :price, placeholder: 'Идентификатор группы', value: @publish.price, label: 'Цена'
-                = f.select :album_id, options_for_select(@albums), value: @publish.album.try(:album_id)
-                = f.button :submit, value: 'Опубликовать'
+                = f.input :name, placeholder: 'Идентификатор группы', label: 'Название'
+                = f.input :caption, placeholder: 'Идентификатор группы', label: 'Описание'
+                = f.input :price, placeholder: 'Идентификатор группы', label: 'Цена'
+                = label_tag 'publish_album_id', 'Выберите альбом для загрузки'
+                = f.select :album_id, options_for_select(@albums)
+                = f.button :submit, value: 'Опубликовать в группу'
+    .columns.small-12.medium-6
+        .block.publish_photo
+            = image_tag @publish.image

@@ -3,18 +3,24 @@
     .columns.small-12.medium-6
         .block.product_block
             h5 Данные ТМ Слингуля
-            .product_name= @product.name
+            .product_name.lined= @product.name
             .product_image= image_tag @product.image
-            .product_caption= @product.caption
-            .product_price= "#{@product.price} руб."
+            .product_caption
+                p.lined Описание
+                - @product.caption.each_line do |line|
+                    p= line
+            .product_price.lined= "#{@product.price} руб."
     .columns.small-12.medium-6
         .block.product_block
             h5 Данные в публикации
             - if @publish.present?
-                .product_name= @publish.name
+                .product_name.lined= @publish.name
                 .product_image= image_tag @publish.image
-                .product_caption= @publish.caption
-                .product_price= "#{@publish.price} руб."
+                .product_caption
+                    p.lined Описание
+                    - @publish.caption.each_line do |line|
+                        p= line
+                .product_price.lined= "#{@publish.price} руб."
                 = link_to 'Редактировать публикацию', product_publish_path(@product, @publish), class: 'button'
             - else
                 = link_to 'Подготовить публикацию', product_publishes_path(@product), class: 'button', method: :post

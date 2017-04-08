@@ -46,6 +46,9 @@ body {
     h5 {
         text-align: center;
     }
+    .lined {
+        text-decoration: underline;
+    }
 }
 
 .product_block {
@@ -58,10 +61,23 @@ body {
             height: 100%;
         }
     }
+    .product_caption {
+        p {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .publish_block {
     textarea {
         height: 125px;
+    }
+}
+
+.publish_photo {
+    text-align: center;
+    img {
+        max-width: 100%;
+        max-height: 450px;
     }
 }

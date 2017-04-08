@@ -2,7 +2,7 @@ require 'open-uri'
 
 class UploadingProductsService
     GROUP_ID = -10329309
-    ALBUM_IDS = [{'Эрго-рюкзаки' => 95176931}]
+    ALBUM_IDS = {'Слинги-рюкзаки' => 95176931, 'Май-слинги' => 93917967}
 
     attr_reader :user, :count, :photos_info
 
