@@ -4,8 +4,10 @@
         = simple_form_for @vk_group, url: vk_group_path(@vk_group), method: :patch, remote: true do |f|
             = f.input :group_id, placeholder: 'Идентификатор группы', label: false
             p Добавить/Редактировать альбомы
-            = f.simple_fields_for :albums do |y|
-                .row
-                    .columns.small-6= y.input :album_name, placeholder: 'Название альбома', label: false
-                    .columns.small-6= y.input :album_id, placeholder: 'Идентификатор альбома', label: false
-            = f.button :submit, value: 'Сохранить'
+            .albums
+                = f.simple_fields_for :albums do |y|
+                    .row.album
+                        .columns.small-6= y.input :album_name, placeholder: 'Название альбома', label: false
+                        .columns.small-6= y.input :album_id, placeholder: 'Идентификатор альбома', label: false
+                = link_to 'Добавить альбом', '', class: 'duplicate_album button'
+            p= f.button :submit, value: 'Сохранить'
