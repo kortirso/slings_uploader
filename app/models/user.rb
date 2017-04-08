@@ -8,6 +8,8 @@ class User < ApplicationRecord
     has_one :vk_group
     has_many :albums, through: :vk_group
 
+    validates :role, inclusion: { in: %w(user admin) }
+
     after_create :create_sites_objects
 
     def self.find_for_oauth(auth)
@@ -26,6 +28,10 @@ class User < ApplicationRecord
         user.identities.create(provider: auth.provider, uid: auth.uid)
 
         user
+    end
+
+    def is_admin?
+        role == 'admin'
     end
 
     private

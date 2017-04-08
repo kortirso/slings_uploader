@@ -10,6 +10,8 @@
                 - @product.caption.each_line do |line|
                     p= line
             .product_price.lined= "#{@product.price} руб."
+            - if current_user.is_admin?
+                = link_to 'Редактировать товар', edit_product_path(@product), class: 'button'
     .columns.small-12.medium-6
         .block.product_block
             h5 Данные в публикации

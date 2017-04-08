@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show]
     resources :categories, only: [:index, :show]
-    resources :products, only: :show do
+    resources :products, except: [:index] do
         resources :publishes, only: [:show, :create, :update]
     end
     resources :vk_groups, only: :update

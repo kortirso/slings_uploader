@@ -7,6 +7,6 @@ class CategoriesController < ApplicationController
 
     def show
         @category = Category.friendly.find(params[:id])
-        @products = @category.products.order(id: :desc)
+        @products = @category.products.order(id: :desc).includes(:publishes)
     end
 end
