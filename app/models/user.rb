@@ -1,14 +1,14 @@
 class User < ApplicationRecord
     devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:vkontakte]
 
-    has_many :identities
-    has_many :publishes
+    has_many :identities, dependent: :destroy
+    has_many :publishes, dependent: :destroy
     
-    has_one :site
-    has_one :vk_group
+    has_one :site, dependent: :destroy
+    has_one :vk_group, dependent: :destroy
     has_many :albums, through: :vk_group
 
-    validates :role, inclusion: { in: %w(user admin) }
+    validates :role, presence: true, inclusion: { in: %w(user admin) }
 
     after_create :create_sites_objects
 
