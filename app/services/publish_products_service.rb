@@ -20,7 +20,7 @@ class PublishProductsService
     end
 
     def upload_image
-        @upload_hash = VK::Photos::UploadImageService.call({upload_url: upload_url, image_path: publish.image.to_s})
+        @upload_hash = VK::Photos::UploadImageService.call({upload_url: upload_url, image_path: publish.product_image.to_s})
     end
 
     def save_image

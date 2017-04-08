@@ -11,14 +11,16 @@ class Publish < ApplicationRecord
 
     after_create :fill_publish
 
+    def product_image
+        product.image
+    end
+
     private
 
     def fill_publish
         self.name = product.name
         self.caption = product.caption
         self.price = product.price
-        File.open("#{Rails.root}/public#{self.product.image.to_s}") { |f| self.image = f }
         self.save
-        Rails.logger.debug "1 - #{self.name}, 2 - #{self.price}, 3 - #{self.image.to_s}"
     end
 end

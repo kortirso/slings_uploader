@@ -15,7 +15,7 @@
             h5 Данные в публикации
             - if @publish.present?
                 .product_name.lined= @publish.name
-                .product_image= image_tag @publish.image
+                .product_image= image_tag @publish.product_image
                 .product_caption
                     p.lined Описание
                     - @publish.caption.each_line do |line|
