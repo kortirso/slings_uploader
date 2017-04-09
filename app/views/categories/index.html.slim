@@ -1,5 +1,6 @@
 = render 'shared/categories_navigation'
 .row
+    p= link_to 'Массовая публикация', mass_inserting_products_path, method: :post, remote: true, class: 'button'
     - @products.each do |product|
         = link_to product do
             .columns.small-4.medium-2.end

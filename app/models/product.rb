@@ -22,4 +22,15 @@ class Product < ApplicationRecord
     def normalize_friendly_id(input)
         input.to_s.to_slug.normalize(transliterations: :russian).to_s
     end
+
+    def self.create_publishes(user)
+        Publish.where(user: user).destroy_all
+        albums = user.albums.get_list
+
+        all.each do |product|
+            Publish.create product: product, user: user, album_id: albums.assoc(product.category.name)[1]
+        end
+
+        Publish.where(user: user)
+    end
 end

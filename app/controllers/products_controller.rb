@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
     before_action :get_categories, only: :show
-    before_action :check_admin_role, except: :show
+    before_action :check_admin_role, except: [:show, :mass_inserting]
     before_action :find_product, only: [:show, :edit, :update, :destroy]
 
     def show
@@ -35,6 +35,10 @@ class ProductsController < ApplicationController
     def destroy
         @product.destroy
         redirect_to products_path
+    end
+
+    def mass_inserting
+        CatalogPublishingJob.perform_later({user: current_user})
     end
 
     private
