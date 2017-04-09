@@ -47,10 +47,6 @@ class ProductsController < ApplicationController
         @product = Product.friendly.find(params[:id])
     end
 
-    def check_admin_role
-        render template: 'shared/404', status: 404 unless current_user.is_admin?
-    end
-
     def product_params
         params.require(:product).permit(:name, :caption, :price, :category_id, :image)
     end

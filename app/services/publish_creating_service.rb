@@ -1,5 +1,5 @@
-class PublishProductsService
-    attr_reader :user, :publish, :upload_url, :upload_hash
+class PublishCreatingService
+    attr_reader :user, :publish, :upload_url, :upload_hash, :photo_id
 
     def initialize(params)
         @user = params[:user]
@@ -10,6 +10,7 @@ class PublishProductsService
         get_upload_url
         upload_image
         save_image
+        update_publish
     end
 
     private
@@ -24,6 +25,11 @@ class PublishProductsService
     end
 
     def save_image
-        VK::Photos::SaveService.call({token: user.token, album_id: publish.album_id, group_id: user.vk_group.group_id, caption: publish.caption, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash']})
+        response = VK::Photos::SaveService.call({token: user.token, album_id: publish.album_id, group_id: user.vk_group.group_id, caption: publish.caption, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash']})
+        @photo_id = response['response'][0]['id']
+    end
+
+    def update_publish
+        publish.update(photo_id: photo_id)
     end
 end

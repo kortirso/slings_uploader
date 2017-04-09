@@ -1,6 +1,6 @@
 require 'open-uri'
 
-class UploadingProductsService
+class ProductsUploadingService
     GROUP_ID = -10329309
     ALBUM_IDS = {'Слинги-рюкзаки' => 95176931, 'Май-слинги' => 93917967}
 

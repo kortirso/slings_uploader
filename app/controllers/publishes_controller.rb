@@ -1,6 +1,6 @@
 class PublishesController < ApplicationController
-    before_action :find_product, only: :create
-    before_action :find_publish, only: :update
+    before_action :find_product, only: [:create, :destroy]
+    before_action :find_publish, only: [:update, :destroy]
 
     def show
         @publish = Publish.find_by(id: params[:id])
@@ -18,8 +18,14 @@ class PublishesController < ApplicationController
 
     def update
         if @publish.update(publish_params)
-            ProductPublishingJob.perform_later({user: current_user, publish: @publish})
+            PublishCreatingJob.perform_later({user: current_user, publish: @publish})
         end        
+    end
+
+    def destroy
+        @publish.destroy
+        PublishDeletingJob.perform_later({user: current_user, publish: @publish})
+        redirect_to @product
     end
 
     private

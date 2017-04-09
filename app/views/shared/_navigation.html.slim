@@ -7,7 +7,5 @@ nav
             ul.menu.dropdown.vertical.medium-horizontal data-dropdown-menu=""
                 li= link_to 'Главная', root_path
                 li= link_to 'Каталог товаров', categories_path
-                - if current_user.is_admin?
-                    li= link_to 'Добавить товар', new_product_path
                 li= link_to 'Настройки', current_user
                 li= link_to 'Выход', destroy_user_session_path, method: :delete

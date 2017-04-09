@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     resources :categories, only: [:index, :show]
     resources :products, except: [:index] do
-        resources :publishes, only: [:show, :create, :update]
+        resources :publishes, only: [:show, :create, :update, :destroy]
         post :mass_inserting, on: :collection
     end
     resources :vk_groups, only: :update

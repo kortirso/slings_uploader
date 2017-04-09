@@ -9,6 +9,7 @@
                 = label_tag 'publish_album_id', 'Выберите альбом для загрузки'
                 = f.select :album_id, options_for_select(@albums)
                 = f.button :submit, value: 'Опубликовать в группу'
+                /= link_to 'Удалить публикацию', product_publish_path(@publish.product, @publish), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'button delete'
     .columns.small-12.medium-6
         .block.publish_photo
             = image_tag @publish.product_image

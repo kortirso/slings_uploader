@@ -1,0 +1,5 @@
+- if current_user.is_admin?
+    .row
+        .columns.small-12
+            h5 Функции администратора
+            p= link_to 'Добавить товар', new_product_path, class: 'button'

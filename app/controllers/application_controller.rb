@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
         render template: 'welcome/index' unless user_signed_in?
     end
 
+    def check_admin_role
+        render template: 'shared/404', status: 404 unless current_user.is_admin?
+    end
+
     def get_categories
         @categories = Category.all
     end
