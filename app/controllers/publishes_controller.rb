@@ -23,8 +23,8 @@ class PublishesController < ApplicationController
     end
 
     def destroy
-        @publish.destroy
         PublishDeletingJob.perform_later({user: current_user, publish: @publish})
+        @publish.destroy
         redirect_to @product
     end
 
