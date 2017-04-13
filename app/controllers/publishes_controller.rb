@@ -21,7 +21,8 @@ class PublishesController < ApplicationController
             if params[:to_market].present? && params[:to_market] == '1'
                 MarketPublishCreatingJob.perform_later({user: current_user, publish: @publish})
             end
-        end        
+        end
+        redirect_to product_publish_path(@publish.product, @publish)
     end
 
     def destroy

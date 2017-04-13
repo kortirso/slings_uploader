@@ -2,7 +2,7 @@
     .columns.small-12.medium-6
         .block.publish_block
             h5= "Публикация товара #{@publish.name}"
-            = simple_form_for @publish, url: product_publish_path(@publish.product, @publish), method: :patch, remote: true do |f|
+            = simple_form_for @publish, url: product_publish_path(@publish.product, @publish), method: :patch do |f|
                 = f.input :name, placeholder: 'Название товара', label: 'Название'
                 = f.input :caption, placeholder: 'Описание товара', label: 'Описание'
                 = f.input :price, placeholder: 'Цена товара', label: 'Цена'

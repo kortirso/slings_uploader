@@ -1,5 +1,5 @@
 class PublishEditingService
-    attr_reader :user, :publish, :upload_url, :upload_hash, :photo_id
+    attr_reader :user, :publish
 
     def initialize(params)
         @user = params[:user]
