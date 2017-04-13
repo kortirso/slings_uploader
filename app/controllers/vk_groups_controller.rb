@@ -3,6 +3,7 @@ class VkGroupsController < ApplicationController
 
     def update
         @vk_group.update(vk_group_params)
+        redirect_to current_user
     end
 
     private
@@ -13,7 +14,7 @@ class VkGroupsController < ApplicationController
     end
 
     def vk_group_params
-        p = params.require(:vk_group).permit(:group_id, albums_attributes: [:album_id, :album_name, :vk_group_id, :id]).to_h
+        p = params.require(:vk_group).permit(:group_id, archive_attributes: [:album_id, :vk_group_id, :id], albums_attributes: [:album_id, :album_name, :vk_group_id, :id]).to_h
         p['albums_attributes'].delete_if { |key, value| value['album_id'].empty? }
         p
     end

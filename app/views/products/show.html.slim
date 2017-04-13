@@ -24,6 +24,6 @@
                         p= line
                 .product_price.lined= "#{@publish.price} руб."
                 = link_to 'Редактировать публикацию', product_publish_path(@product, @publish), class: 'button'
-                = link_to 'Удалить публикацию', product_publish_path(@product, @publish), method: :delete, class: 'button' if @publish.photo_id.present?
+                = link_to 'Удалить публикацию', product_publish_path(@product, @publish), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'button' if @publish.photo_id.present? && current_user.vk_group.archive.is_set?
             - else
                 = link_to 'Подготовить публикацию', product_publishes_path(@product), class: 'button', method: :post

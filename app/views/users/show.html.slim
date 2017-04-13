@@ -1,7 +1,7 @@
 .row
     .columns.small-12.medium-6
         p Настройки группы ВК
-        = simple_form_for @vk_group, url: vk_group_path(@vk_group), method: :patch, remote: true do |f|
+        = simple_form_for @vk_group, url: vk_group_path(@vk_group), method: :patch do |f|
             = f.input :group_id, placeholder: 'Идентификатор группы', label: false
             p Добавить/Редактировать альбомы
             .albums
@@ -10,4 +10,8 @@
                         .columns.small-6= y.input :album_name, placeholder: 'Название альбома', label: false
                         .columns.small-6= y.input :album_id, placeholder: 'Идентификатор альбома', label: false
                 = link_to 'Добавить альбом', '', class: 'duplicate_album button'
+            p Редактировать архивный альбом
+            .archive_album
+                = f.simple_fields_for :archive do |y|
+                    = y.input :album_id, placeholder: 'Идентификатор архивного альбома', label: false, value: @vk_group.archive.album_id
             p= f.button :submit, value: 'Сохранить'

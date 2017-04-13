@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     def show
         @vk_group = current_user.vk_group
         @vk_group.albums.build
+        @vk_group.build_archive if @vk_group.archive.nil?
     end
 
     private
