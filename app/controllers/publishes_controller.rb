@@ -1,9 +1,8 @@
 class PublishesController < ApplicationController
     before_action :find_product, only: [:create, :destroy]
-    before_action :find_publish, only: [:update, :destroy]
+    before_action :find_publish, only: [:show, :update, :destroy]
 
     def show
-        @publish = Publish.find_by(id: params[:id])
         @albums = current_user.albums.get_list
     end
 
@@ -19,6 +18,9 @@ class PublishesController < ApplicationController
     def update
         if @publish.update(publish_params)
             PublishCreatingJob.perform_later({user: current_user, publish: @publish})
+            if params[:to_market].present? && params[:to_market] == '1'
+                MarketPublishCreatingJob.perform_later({user: current_user, publish: @publish})
+            end
         end        
     end
 
