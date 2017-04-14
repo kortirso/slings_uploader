@@ -8,5 +8,5 @@
                 = f.input :price, placeholder: 'Цена товара', label: 'Цена'
                 = label_tag 'product_category_id', 'Выберите категорию для загрузки'
                 = f.select :category_id, options_for_select(@categories)
-                = f.file_field :image
+                = f.file_field :images, multiple: true
                 = f.button :submit, value: 'Сохранить'

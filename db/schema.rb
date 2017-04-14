@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413143311) do
+ActiveRecord::Schema.define(version: 20170414160642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 20170413143311) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["vk_group_id"], name: "index_archives_on_vk_group_id", using: :btree
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.string   "image"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_attachments_on_product_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -69,7 +77,6 @@ ActiveRecord::Schema.define(version: 20170413143311) do
     t.integer  "category_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.string   "image"
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
     t.index ["slug"], name: "index_products_on_slug", unique: true, using: :btree
   end

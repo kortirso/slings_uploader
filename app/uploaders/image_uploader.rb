@@ -1,4 +1,4 @@
-class ProductUploader < CarrierWave::Uploader::Base
+class ImageUploader < CarrierWave::Uploader::Base
     include CarrierWave::RMagick
 
     storage :file

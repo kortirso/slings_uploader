@@ -9,11 +9,14 @@ class ProductsController < ApplicationController
 
     def new
         @categories = Category.get_list
+        @product = Product.new
+        @attachments = @product.attachments.build
     end
 
     def create
         product = Product.new(product_params)
         if product.save
+            params['product']['attachment']['image'].each { |image| product.attachments.create(image: image) }
             redirect_to product
         else
             render :new
@@ -22,6 +25,7 @@ class ProductsController < ApplicationController
 
     def edit
         @categories = Category.get_list
+        @attachments = @product.attachments.build
     end
 
     def update
@@ -41,6 +45,10 @@ class ProductsController < ApplicationController
         CatalogPublishingJob.perform_later({user: current_user})
     end
 
+    def upload_all_db
+        CatalogUploadingJob.perform_later({user: current_user})
+    end
+
     private
 
     def find_product
@@ -48,6 +56,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-        params.require(:product).permit(:name, :caption, :price, :category_id, :image)
+        params.require(:product).permit(:name, :caption, :price, :category_id)
     end
 end

@@ -27,17 +27,25 @@ class ProductsUploadingService
 
     def handle_photos(album_name)
         category = Category.find_by(name: album_name)
-        photos_info.each { |photo| create_product(photo, category.id) }
+        photos_info.each { |photo| create_product(photo, category.id, album_name) }
     end
 
-    def create_product(photo_info, category_id)
-        product_photo_id = photo_info['id']
-        product_max_image_link = photo_info[get_max_image_link(photo_info)]
-        product_text = photo_info['text']
-        
-        product = Product.new name: product_text.split(',')[2], price: 2600, caption: product_text, category_id: category_id
-        open(product_max_image_link) { |f| product.image = f }
+    def create_product(photo_info, category_id, album_name)
+        return false if photo_info['text'].empty?
+        product_name = get_product_name(photo_info)
+        return false if Product.find_by(name: product_name, category_id: category_id).present?
+        product = Product.new name: product_name, price: get_product_price(photo_info, album_name), caption: photo_info['text'], category_id: category_id
+        open(photo_info[get_max_image_link(photo_info)]) { |f| product.image = f }
         product.save
+    end
+
+    def get_product_name(photo_info)
+        photo_info['text'].lines.first.chomp.split(',')[-2].strip.delete('\"')
+    end
+
+    def get_product_price(photo_info, album_name)
+        price_line = photo_info['text'].lines.size > 2 ? photo_info['text'].lines[-2] : photo_info['text'].lines[-1]
+        album_name == 'Слинги-рюкзаки' ? price_line.chomp.split(',')[-1].split[0] : price_line.split(' ')[0]
     end
 
     def get_max_image_link(product)

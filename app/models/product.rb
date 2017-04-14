@@ -5,11 +5,11 @@ class Product < ApplicationRecord
 
     friendly_id :slug_candidates, use: :slugged
 
-    mount_uploader :image, ProductUploader
-
     belongs_to :category
 
     has_many :publishes
+    has_many :attachments, dependent: :destroy
+    accepts_nested_attributes_for :attachments, allow_destroy: true
 
     validates :name, presence: true, uniqueness: true
     validates :category_id, presence: true
@@ -21,6 +21,10 @@ class Product < ApplicationRecord
 
     def normalize_friendly_id(input)
         input.to_s.to_slug.normalize(transliterations: :russian).to_s
+    end
+
+    def primary_image
+        attachments.first.image.to_s
     end
 
     def self.create_publishes(user)

@@ -1,6 +1,4 @@
-class Publish < ApplicationRecord
-    mount_uploader :image, ProductUploader
-    
+class Publish < ApplicationRecord    
     belongs_to :user
     belongs_to :product
     belongs_to :album
@@ -12,7 +10,7 @@ class Publish < ApplicationRecord
     after_create :fill_publish
 
     def product_image
-        product.image
+        product.primary_image
     end
 
     private
