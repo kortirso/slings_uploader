@@ -9,6 +9,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     private
 
     def provides_callback
+        Rails.logger.error "1 - #{env['omniauth.auth']}"
+        Rails.logger.error "2 - #{env['omniauth.auth'].uid}"
+        render_not_found if env['omniauth.auth'].nil?
         @user = User.find_for_oauth(env['omniauth.auth'])
         if @user
             sign_in_and_redirect @user, event: :authentication
