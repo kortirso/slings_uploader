@@ -27,6 +27,11 @@ class Product < ApplicationRecord
         attachments.first.image.to_s
     end
 
+    def secondary_images
+        attachments.to_a.shift
+        attachments
+    end
+
     def self.create_publishes(user)
         Publish.where(user: user).destroy_all
         albums = user.albums.get_list

@@ -5,5 +5,5 @@
         = link_to product do
             .columns.small-4.medium-2.end
                 .block.catalog_block
-                    .catalog_image= image_tag product.image
+                    .catalog_image= image_tag product.primary_image
                     = "#{product.name}#{' (Опубликовано)' if product.publishes.for_user(current_user).present?}"

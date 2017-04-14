@@ -65,6 +65,12 @@ body {
             height: 100%;
         }
     }
+    .product_images {
+        img {
+            max-height: 75px;
+            margin-right: 5px;
+        }
+    }
     .product_caption {
         p {
             margin-bottom: 0;

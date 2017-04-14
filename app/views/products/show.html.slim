@@ -5,6 +5,9 @@
             h5 Данные ТМ Слингуля
             .product_name.lined= @product.name
             .product_image= image_tag @product.primary_image
+            .product_images
+                - @product.secondary_images.each do |image|
+                    = image_tag image.image.to_s
             .product_caption
                 p.lined Описание
                 - @product.caption.each_line do |line|

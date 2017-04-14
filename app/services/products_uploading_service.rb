@@ -32,11 +32,15 @@ class ProductsUploadingService
 
     def create_product(photo_info, category_id, album_name)
         return false if photo_info['text'].empty?
+
         product_name = get_product_name(photo_info)
-        return false if Product.find_by(name: product_name, category_id: category_id).present?
-        product = Product.new name: product_name, price: get_product_price(photo_info, album_name), caption: photo_info['text'], category_id: category_id
-        open(photo_info[get_max_image_link(photo_info)]) { |f| product.image = f }
-        product.save
+        product = Product.find_by(name: product_name, category_id: category_id)
+        if product.present?
+            open(photo_info[get_max_image_link(photo_info)]) { |f| product.attachments.create(image: f) }
+        else
+            product = Product.create name: product_name, price: get_product_price(photo_info, album_name), caption: photo_info['text'], category_id: category_id
+            open(photo_info[get_max_image_link(photo_info)]) { |f| product.attachments.create(image: f) }
+        end
     end
 
     def get_product_name(photo_info)
