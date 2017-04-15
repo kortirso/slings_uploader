@@ -1,6 +1,6 @@
 = render 'shared/categories_navigation'
 .row
-    .columns.small-12.medium-6
+    .columns.small-12.large-6
         .block.product_block
             h5 Данные ТМ Слингуля
             .product_name.lined= @product.name
@@ -15,7 +15,7 @@
             .product_price.lined= "#{@product.price} руб."
             - if current_user.is_admin?
                 = link_to 'Редактировать товар', edit_product_path(@product), class: 'button'
-    .columns.small-12.medium-6
+    .columns.small-12.large-6
         .block.product_block
             h5 Данные в публикации
             - if @publish.present?
