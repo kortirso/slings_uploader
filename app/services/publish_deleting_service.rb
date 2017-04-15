@@ -7,7 +7,8 @@ class PublishDeletingService
     end
 
     def deleting
-        #response = VK::Photos::DeleteService.call({token: user.token, owner_id: user.vk_group.group_id, photo_id: publish.photo_id})
-        response = VK::Photos::MoveService.call({token: user.token, owner_id: user.vk_group.group_id, photo_id: publish.photo_id, target_album_id: user.vk_group.archive.album_id})
+        publish.attachments.each do |a|
+            response = VK::Photos::MoveService.call({token: user.token, owner_id: user.vk_group.group_id, photo_id: a.photo_id, target_album_id: user.vk_group.archive.album_id})
+        end
     end
 end

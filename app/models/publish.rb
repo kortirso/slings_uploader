@@ -3,6 +3,8 @@ class Publish < ApplicationRecord
     belongs_to :product
     belongs_to :album
 
+    has_many :attachments, dependent: :destroy
+
     validates :user_id, :product_id, presence: true
 
     scope :for_user, -> (user) { find_by user: user }
@@ -11,6 +13,10 @@ class Publish < ApplicationRecord
 
     def product_image
         product.primary_image
+    end
+
+    def is_published?
+        published
     end
 
     private

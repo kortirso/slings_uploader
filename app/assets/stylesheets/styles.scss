@@ -68,7 +68,7 @@ body {
     .product_images {
         img {
             max-height: 75px;
-            margin-right: 5px;
+            margin: 0 5px 5px 0;
         }
     }
     .product_caption {
@@ -94,6 +94,8 @@ body {
 
 .catalog_block {
     text-align: center;
+    height: 300px;
+    margin-bottom: 10px;
     .catalog_image {
         height: 200px;
         img {

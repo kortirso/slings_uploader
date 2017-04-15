@@ -11,7 +11,7 @@ class Product < ApplicationRecord
     has_many :attachments, dependent: :destroy
     accepts_nested_attributes_for :attachments, allow_destroy: true
 
-    validates :name, presence: true, uniqueness: true
+    validates :name, presence: true#, uniqueness: true
     validates :category_id, presence: true
     validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
@@ -25,6 +25,10 @@ class Product < ApplicationRecord
 
     def primary_image
         attachments.first.image.to_s
+    end
+
+    def primary_image_small
+        attachments.first.image.for_catalog.to_s
     end
 
     def secondary_images

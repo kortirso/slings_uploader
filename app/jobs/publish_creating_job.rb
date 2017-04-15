@@ -2,10 +2,10 @@ class PublishCreatingJob < ApplicationJob
     queue_as :default
 
     def perform(params)
-        if params[:publish].photo_id.nil?
-            PublishCreatingService.new({user: params[:user], publish: params[:publish]}).publishing
+        if params[:publish].is_published?
+            PublishEditingService.new({user: params[:user], publish: params[:publish], photos_check: params[:photos_check]}).editing
         else
-            PublishEditingService.new({user: params[:user], publish: params[:publish]}).editing
+            PublishCreatingService.new({user: params[:user], publish: params[:publish], photos_check: params[:photos_check]}).publishing
         end
     end
 end

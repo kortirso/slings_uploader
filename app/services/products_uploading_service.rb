@@ -4,11 +4,11 @@ class ProductsUploadingService
     GROUP_ID = -10329309
     ALBUM_IDS = {'Слинги-рюкзаки' => 95176931, 'Май-слинги' => 93917967}
 
-    attr_reader :user, :count, :photos_info
+    attr_reader :user, :photos_info, :errors
 
     def initialize(params)
         @user = params[:user]
-        @count = params[:count]
+        @errors = []
     end
 
     def upload
@@ -16,12 +16,13 @@ class ProductsUploadingService
             get_album_info(album_id)
             handle_photos(album_name)
         end
+        Rails.logger.debug errors
     end
 
     private
 
     def get_album_info(album_id)
-        response = VK::Photos::GetService.call({token: user.token, album_id: album_id, group_id: GROUP_ID, count: count})
+        response = VK::Photos::GetService.call({token: user.token, album_id: album_id, group_id: GROUP_ID, count: ''})
         @photos_info = response['response']['items']
     end
 
@@ -35,12 +36,17 @@ class ProductsUploadingService
 
         product_name = get_product_name(photo_info)
         product = Product.find_by(name: product_name, category_id: category_id)
-        if product.present?
-            open(photo_info[get_max_image_link(photo_info)]) { |f| product.attachments.create(image: f) }
-        else
-            product = Product.create name: product_name, price: get_product_price(photo_info, album_name), caption: photo_info['text'], category_id: category_id
-            open(photo_info[get_max_image_link(photo_info)]) { |f| product.attachments.create(image: f) }
+        if product.nil?
+            product = Product.create name: product_name, price: get_product_price(photo_info, album_name).to_i, caption: photo_info['text'], category_id: category_id
+            product.publishes.create user: user, album_id: ALBUM_IDS['album_name'], published: true
         end
+
+        download = open(photo_info[get_max_image_link(photo_info)])
+        temp_file = "#{Rails.root}/public/uploads/tmp/#{download.base_uri.to_s.split('/')[-1]}"
+        IO.copy_stream(download, temp_file)
+
+        File.open(temp_file) { |f| product.attachments.create photo_id: photo_info['id'], image: f }
+        File.delete(temp_file)
     end
 
     def get_product_name(photo_info)
@@ -49,7 +55,15 @@ class ProductsUploadingService
 
     def get_product_price(photo_info, album_name)
         price_line = photo_info['text'].lines.size > 2 ? photo_info['text'].lines[-2] : photo_info['text'].lines[-1]
-        album_name == 'Слинги-рюкзаки' ? price_line.chomp.split(',')[-1].split[0] : price_line.split(' ')[0]
+        if album_name == 'Слинги-рюкзаки'
+            if price_line.chomp.split(',').size == 1
+                return price_line.chomp.split(' ')[-2]
+            else
+                return price_line.chomp.split(',')[-1].split[0]
+            end
+        else
+            return price_line.split(' ')[0]
+        end
     end
 
     def get_max_image_link(product)

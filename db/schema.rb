@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414160642) do
+ActiveRecord::Schema.define(version: 20170415065416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,11 @@ ActiveRecord::Schema.define(version: 20170414160642) do
     t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "photo_id"
+    t.integer  "parent_id"
+    t.integer  "publish_id"
     t.index ["product_id"], name: "index_attachments_on_product_id", using: :btree
+    t.index ["publish_id"], name: "index_attachments_on_publish_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -84,15 +88,14 @@ ActiveRecord::Schema.define(version: 20170414160642) do
   create_table "publishes", force: :cascade do |t|
     t.text     "caption"
     t.integer  "price"
-    t.string   "image"
     t.integer  "user_id"
     t.integer  "product_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "name",           default: "", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "name",           default: "",    null: false
     t.integer  "album_id"
-    t.integer  "photo_id"
     t.integer  "market_item_id"
+    t.boolean  "published",      default: false
     t.index ["album_id"], name: "index_publishes_on_album_id", using: :btree
     t.index ["product_id"], name: "index_publishes_on_product_id", using: :btree
     t.index ["user_id"], name: "index_publishes_on_user_id", using: :btree
