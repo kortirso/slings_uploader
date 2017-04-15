@@ -24,7 +24,7 @@ class MarketPublishCreatingService
     end
 
     def upload_image
-        @upload_hash = VK::Photos::MarketUploadImageService.call({upload_url: upload_url, image_path: publish.product_image.to_s})
+        @upload_hash = VK::Photos::MarketUploadImageService.call({upload_url: upload_url, image_path: publish.product_image})
     end
 
     def save_image

@@ -19,16 +19,16 @@ class PublishesController < ApplicationController
         if @publish.update(publish_params)
             PublishCreatingJob.perform_later({user: current_user, publish: @publish, photos_check: params[:photos_check]})
             if params[:to_market].present? && params[:to_market] == '1'
-                MarketPublishCreatingJob.perform_later({user: current_user, publish: @publish, photos_check: params[:photos_check]})
+                MarketPublishCreatingJob.perform_later({user: current_user, publish: @publish})
             end
         end
         redirect_to product_publish_path(@publish.product, @publish)
     end
 
     def destroy
-        PublishDeletingService.new({user: params[:user], publish: params[:publish]}).deleting
-        if params[:publish].market_item_id.present?
-            MarketPublishDeletingService.new({user: params[:user], publish: params[:publish]}).deleting
+        PublishDeletingService.new({user: current_user, publish: @publish}).deleting
+        if @publish.market_item_id.present?
+            MarketPublishDeletingService.new({user: current_user, publish: @publish}).deleting
         end
         @publish.destroy
         redirect_to @product
