@@ -25,12 +25,12 @@ class Product < ApplicationRecord
 
     def primary_image
         attachment = attachments.first
-        attachment.nil? ? nil : attachment.image.to_s
+        attachment.nil? ? '' : attachment.image.to_s
     end
 
     def primary_image_small
         attachment = attachments.first
-        attachment.nil? ? nil : attachment.image.for_catalog.to_s
+        attachment.nil? ? '' : attachment.image.for_catalog.to_s
     end
 
     def secondary_images
