@@ -5,6 +5,7 @@ nav
     .top-bar#example-menu
         .top-bar-left
             ul.menu.dropdown.vertical.medium-horizontal data-dropdown-menu=""
+                li.logo= image_tag 'logo.png'
                 li= link_to 'Главная', root_path
                 li= link_to 'Каталог товаров', categories_path
                 li= link_to 'Настройки', current_user

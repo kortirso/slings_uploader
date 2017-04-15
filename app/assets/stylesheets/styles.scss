@@ -31,11 +31,22 @@ body {
     }
 }
 
-.menu {
-    li {
-        a {
-            &.active {
-                text-decoration: underline;
+nav {
+    .top-bar {
+        background: linear-gradient(to bottom, #f5ffff 0%,#ffda2a 100%);
+        .menu {
+            background: none;
+            li {
+                &.logo {
+                    img {
+                        max-height: 38px;
+                    }
+                }
+                a {
+                    &.active {
+                        text-decoration: underline;
+                    }
+                }
             }
         }
     }
@@ -97,7 +108,7 @@ body {
     height: 275px;
     margin-bottom: 10px;
     &.published {
-        background: #CCC;
+        background: #DDD;
     }
     .catalog_image {
         height: 200px;
