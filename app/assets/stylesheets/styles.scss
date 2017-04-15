@@ -52,6 +52,17 @@ nav {
     }
 }
 
+.news {
+    p {
+        margin-bottom: 3px;
+        &.updated {
+            a {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
 .block {
     box-shadow: 0 4px 6px 2px #AAA;
     padding: 15px;
@@ -69,6 +80,9 @@ nav {
 .product_block {
     div {
         margin-bottom: 5px;
+    }
+    .product_deleted {
+        color: red;
     }
     .product_image {
         height: 200px;

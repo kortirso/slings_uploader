@@ -37,8 +37,8 @@ class ProductsController < ApplicationController
     end
 
     def destroy
-        @product.destroy
-        redirect_to products_path
+        @product.delete
+        redirect_to @product
     end
 
     def mass_inserting

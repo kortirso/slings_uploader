@@ -4,6 +4,8 @@
         .block.product_block
             h5 Данные ТМ Слингуля
             .product_name.lined= @product.name
+            - if @product.deleted?
+                .product_deleted= 'ПРОДУКТ УДАЛЕН'
             .product_image= image_tag @product.primary_image
             .product_images
                 - @product.secondary_images.each do |image|
@@ -13,8 +15,9 @@
                 - @product.caption.each_line do |line|
                     p= line
             .product_price.lined= "#{@product.price} руб."
-            - if current_user.is_admin?
+            - if current_user.is_admin? && !@product.deleted?
                 = link_to 'Редактировать товар', edit_product_path(@product), class: 'button'
+                = link_to 'Удалить товар', product_path(@product), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'button delete'
     .columns.small-12.large-6
         .block.product_block
             h5 Данные в публикации

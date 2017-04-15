@@ -38,6 +38,24 @@ class Product < ApplicationRecord
         attachments
     end
 
+    def status
+        if deleted?
+            'Удален'
+        elsif created_at != updated_at
+             'Обновлен'
+        else
+            'Новый'
+        end
+    end
+
+    def deleted?
+        deleted
+    end
+
+    def delete
+        update(deleted: true)
+    end
+
     def self.create_publishes(user)
         Publish.where(user: user).destroy_all
         albums = user.albums.get_list

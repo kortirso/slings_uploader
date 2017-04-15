@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         post :upload_all_db, on: :collection
     end
     resources :vk_groups, only: :update
+    resources :instructions, only: :index
 
     get 'welcome' => 'welcome#index', as: :welcome
 

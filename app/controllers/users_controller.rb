@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     before_action :check_user, only: :show
 
     def index
-
+        @last_products = Product.order(updated_at: :desc).limit(15).group_by(&:updated_at)
     end
 
     def show

@@ -22,7 +22,7 @@ class PublishesController < ApplicationController
                 MarketPublishCreatingJob.perform_later({user: current_user, publish: @publish})
             end
         end
-        redirect_to product_publish_path(@publish.product, @publish)
+        redirect_to @publish.product
     end
 
     def destroy
