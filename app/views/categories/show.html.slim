@@ -3,6 +3,6 @@
     - @products.each do |product|
         = link_to product do
             .columns.small-6.medium-4.large-2.end
-                .block.catalog_block class="#{'published' if product.publishes.for_user(current_user).present?}"
+                .block.catalog_block class="#{'published' if product.publishes.find_by(user: current_user).present?}"
                     .catalog_image= image_tag product.primary_image_small
                     = product.name

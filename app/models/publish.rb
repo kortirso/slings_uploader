@@ -7,8 +7,6 @@ class Publish < ApplicationRecord
 
     validates :user_id, :product_id, presence: true
 
-    scope :for_user, -> (user) { find_by user: user }
-
     after_create :fill_publish
 
     def product_image
