@@ -42,7 +42,7 @@ class ProductsUploadingService
         end
 
         download = open(photo_info[get_max_image_link(photo_info)])
-        temp_file = "#{Rails.root}/public/uploads/tmp/#{download.base_uri.to_s.split('/')[-1]}"
+        temp_file = "#{Rails.root}/public/uploads/#{download.base_uri.to_s.split('/')[-1]}"
         IO.copy_stream(download, temp_file)
 
         File.open(temp_file) { |f| product.attachments.create photo_id: photo_info['id'], image: f }
