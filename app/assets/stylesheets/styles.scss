@@ -94,8 +94,11 @@ body {
 
 .catalog_block {
     text-align: center;
-    height: 300px;
+    height: 275px;
     margin-bottom: 10px;
+    &.published {
+        background: #CCC;
+    }
     .catalog_image {
         height: 200px;
         img {

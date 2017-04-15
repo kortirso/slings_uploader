@@ -1,9 +1,10 @@
 = render 'shared/categories_navigation'
 .row
-    p= link_to 'Массовая публикация', mass_inserting_products_path, method: :post, remote: true, class: 'button'
+    - unless current_user.publishes.present?
+        p= link_to 'Опубликовать всё', mass_inserting_products_path, method: :post, remote: true, class: 'button'
     - @products.each do |product|
         = link_to product do
             .columns.small-4.medium-2.end
-                .block.catalog_block
+                .block.catalog_block class="#{'published' if product.publishes.for_user(current_user).present?}"
                     .catalog_image= image_tag product.primary_image_small
-                    = "#{product.name}#{' (Опубликовано)' if product.publishes.for_user(current_user).present?}"
+                    = product.name

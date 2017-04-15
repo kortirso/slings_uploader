@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :products, except: [:index] do
         resources :publishes, only: [:show, :create, :update, :destroy]
         post :mass_inserting, on: :collection
+        post :upload_all_db, on: :collection
     end
     resources :vk_groups, only: :update
 
