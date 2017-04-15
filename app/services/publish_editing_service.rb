@@ -7,6 +7,8 @@ class PublishEditingService
     end
 
     def editing
-        response = VK::Photos::EditService.call({token: user.token, owner_id: user.vk_group.group_id, photo_id: publish.photo_id, caption: publish.caption})
+        publish.attachments.where.not(photo_id: nil).each do |a|
+            response = VK::Photos::EditService.call({token: user.token, owner_id: user.vk_group.group_id, photo_id: a.photo_id, caption: publish.caption})
+        end
     end
 end
