@@ -1,4 +1,5 @@
 class VkGroupsController < ApplicationController
+    skip_before_filter :verify_authenticity_token, only: :update
     before_action :find_vk_group
 
     def update
