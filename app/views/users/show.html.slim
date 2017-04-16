@@ -15,8 +15,11 @@
                 = f.simple_fields_for :archive do |y|
                     = y.input :album_id, placeholder: 'Идентификатор архивного альбома', label: false, value: @vk_group.archive.album_id
             p= f.button :submit, value: 'Сохранить'
-    - unless current_user.publishes.present?
-        .columns.small-12.medium-6
+    .columns.small-12.medium-6
+        - unless current_user.publishes.present?
             h5 Публикация всех товаров
             p Пока у вас не выполнена публикация товаров, вы можете использовать массовую публикацию. Но для этого у вас должны быть настроены 2 группы с названиями Слинги-рюкзаки и Май-слинги, а также актуальными идентификаторами (если не выполнены условия, то при нажатии на кнопку реальная загрузка не запустится). Никакие данные при этом не удаляются, желательно загружать данные в пустые альбомы.
             p= link_to 'Опубликовать всё', mass_inserting_products_path, method: :post, class: 'button'
+        h5 Создание товаров для публикаций
+        p= "Для всех публикаций (таких у вас - #{current_user.publishes.where(market_item_id: nil).size}), для которых не был создан товар в группе вк, можно автоматически создать товары."
+        p= link_to 'Создать все товары', marketing_products_path, method: :post, class: 'button'

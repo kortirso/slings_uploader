@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :publishes, only: [:show, :create, :update, :destroy]
         post :mass_inserting, on: :collection
         post :upload_all_db, on: :collection
+        post :marketing, on: :collection
     end
     resources :vk_groups, only: :update
     resources :instructions, only: :index

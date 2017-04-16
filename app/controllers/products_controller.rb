@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-    skip_before_action :verify_authenticity_token, only: [:create, :update, :mass_inserting, :upload_all_db, :destroy]
+    skip_before_action :verify_authenticity_token, only: [:create, :update, :mass_inserting, :upload_all_db, :marketing, :destroy]
     before_action :get_categories, only: :show
-    before_action :check_admin_role, except: [:show, :mass_inserting]
+    before_action :check_admin_role, except: [:show, :mass_inserting, :marketing]
     before_action :find_product, only: [:show, :edit, :update, :destroy]
 
     def show
@@ -51,6 +51,11 @@ class ProductsController < ApplicationController
 
     def upload_all_db
         CatalogUploadingJob.perform_later({user: current_user})
+        redirect_to categories_path
+    end
+
+    def marketing
+        CatalogMarketingJob.perform_later({user: current_user})
         redirect_to categories_path
     end
 
