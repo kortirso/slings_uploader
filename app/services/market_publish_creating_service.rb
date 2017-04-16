@@ -1,11 +1,12 @@
 class MarketPublishCreatingService
     CATEGORY_ID = 104
 
-    attr_reader :user, :publish, :upload_url, :upload_hash, :main_photo_id, :market_item_id
+    attr_reader :user, :publish, :auto, :upload_url, :upload_hash, :main_photo_id, :market_item_id
 
     def initialize(params)
         @user = params[:user]
         @publish = params[:publish]
+        @auto = params[:auto]
     end
 
     def publishing
@@ -33,8 +34,13 @@ class MarketPublishCreatingService
     end
 
     def add_product_to_market
-        response = VK::Market::AddService.call({token: user.token, owner_id: user.vk_group.group_id, description: publish.caption, name: publish.name, category_id: CATEGORY_ID, price: publish.price, main_photo_id: main_photo_id})
+        response = VK::Market::AddService.call({token: user.token, owner_id: user.vk_group.group_id, description: publish.caption, name: name_for_publish, category_id: CATEGORY_ID, price: publish.price, main_photo_id: main_photo_id})
         @market_item_id = response['response']['market_item_id']
+    end
+
+    def name_for_publish
+        publish.name
+        #auto.nil? ? publish.name : "#{publish.product.category.name} #{publish.name}"
     end
 
     def update_publish

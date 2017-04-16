@@ -2,7 +2,8 @@
 
 * {
     font-family: 'PT Sans';
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 400;
 }
 
 html, body {
@@ -64,7 +65,7 @@ nav {
 }
 
 .block {
-    box-shadow: 0 4px 6px 2px #AAA;
+    box-shadow: 0 2px 6px 2px #CCC;
     padding: 15px;
     .button {
         margin: 0 10px 0 0;
