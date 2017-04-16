@@ -39,8 +39,7 @@ class MarketPublishCreatingService
     end
 
     def name_for_publish
-        publish.name
-        #auto.nil? ? publish.name : "#{publish.product.category.name} #{publish.name}"
+        auto.nil? ? publish.name : "#{publish.product.category.single_name} #{publish.name}"
     end
 
     def update_publish
