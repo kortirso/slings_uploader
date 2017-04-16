@@ -34,6 +34,14 @@ class User < ApplicationRecord
         role == 'admin'
     end
 
+    def with_two_albums?
+        albs = albums.pluck(:album_name)
+        return false if albs.size != 2
+        return false unless albs.include? 'Слинги-рюкзаки'
+        return false unless albs.include? 'Май-слинги'
+        true
+    end
+
     private
 
     def create_sites_objects

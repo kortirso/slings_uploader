@@ -1,7 +1,5 @@
 = render 'shared/categories_navigation'
 .row
-    - unless current_user.publishes.present?
-        p= link_to 'Опубликовать всё', mass_inserting_products_path, method: :post, remote: true, class: 'button'
     - @products.each do |product|
         = link_to product do
             .columns.small-6.medium-4.large-2.end

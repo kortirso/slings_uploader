@@ -42,11 +42,15 @@ class ProductsController < ApplicationController
     end
 
     def mass_inserting
-        CatalogPublishingJob.perform_later({user: current_user})
+        if current_user.with_two_albums?
+            CatalogPublishingJob.perform_later({user: current_user})
+            redirect_to categories_path
+        end
     end
 
     def upload_all_db
         CatalogUploadingJob.perform_later({user: current_user})
+        redirect_to categories_path
     end
 
     private

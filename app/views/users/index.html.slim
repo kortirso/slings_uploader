@@ -4,7 +4,7 @@
             h5 Функции администратора
             p= link_to 'Добавить товар', new_product_path, class: 'button'
             - if Product.count == 0
-                p= link_to 'Заполнить БД из базовых альбомов', upload_all_db_products_path, method: :post, remote: true, class: 'button'
+                p= link_to 'Заполнить БД из базовых альбомов', upload_all_db_products_path, method: :post, class: 'button'
 .row
     .columns.small-12
         .news
