@@ -2,6 +2,7 @@ class PublishesController < ApplicationController
     skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
     before_action :find_product, only: [:create, :destroy]
     before_action :find_publish, only: [:show, :update, :destroy]
+    before_action :check_publish, only: :show
 
     def show
         @albums = current_user.albums.get_list
@@ -39,10 +40,16 @@ class PublishesController < ApplicationController
 
     def find_product
         @product = Product.friendly.find(params[:product_id])
+        render_not_found if @product.nil?
     end
 
     def find_publish
         @publish = Publish.find_by(id: params[:id])
+        render_not_found if @publish.nil?
+    end
+
+    def check_publish
+        render_not_found if current_user.id != @publish.user_id
     end
 
     def publish_params

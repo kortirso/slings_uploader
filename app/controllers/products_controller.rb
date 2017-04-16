@@ -63,6 +63,7 @@ class ProductsController < ApplicationController
 
     def find_product
         @product = Product.friendly.find(params[:id])
+        render_not_found if @product.nil?
     end
 
     def product_params
