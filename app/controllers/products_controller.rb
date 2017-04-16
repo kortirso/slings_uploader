@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+    skip_before_action :verify_authenticity_token, only: [:create, :update, :mass_inserting, :upload_all_db, :destroy]
     before_action :get_categories, only: :show
     before_action :check_admin_role, except: [:show, :mass_inserting]
     before_action :find_product, only: [:show, :edit, :update, :destroy]

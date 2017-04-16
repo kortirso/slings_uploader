@@ -1,4 +1,5 @@
 class PublishesController < ApplicationController
+    skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
     before_action :find_product, only: [:create, :destroy]
     before_action :find_publish, only: [:show, :update, :destroy]
 

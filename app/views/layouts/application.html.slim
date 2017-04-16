@@ -2,6 +2,7 @@ doctype html
 html
     head
         title SlingsUploader
+        meta name='yandex-verification' content='eb22680786a40be0'
         = stylesheet_link_tag 'application', media: 'all'
         = javascript_include_tag 'application'
         = csrf_meta_tags
@@ -9,3 +10,4 @@ html
         = render 'shared/navigation' if user_signed_in?
         .inside
             = yield
+        = render 'shared/metrics'
