@@ -12,6 +12,7 @@ class MarketPublishCreatingService
     def publishing
         get_upload_url
         upload_image
+        return false if upload_hash['error'].present?
         save_image
         add_product_to_market
         update_publish
