@@ -56,14 +56,16 @@ class Product < ApplicationRecord
         update(deleted: true)
     end
 
-    def self.create_publishes(user)
-        Publish.where(user: user).destroy_all
+    def self.create_publishes(user, publishes = [])
+        prod_pub = user.publishes.includes(:product).collect { |pub| pub.product }
+        prod_all = Product.all.to_a
+
         albums = user.albums.get_list
 
-        all.each do |product|
-            Publish.create product: product, user: user, album_id: albums.assoc(product.category.name)[1]
+        (prod_all - prod_pub).each do |product|
+            publishes.push Publish.create product: product, user: user, album_id: albums.assoc(product.category.name)[1]
         end
 
-        Publish.where(user: user)
+        publishes
     end
 end

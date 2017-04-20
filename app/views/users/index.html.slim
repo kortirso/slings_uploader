@@ -6,7 +6,7 @@
             - if Product.count == 0
                 p= link_to 'Заполнить БД из базовых альбомов', upload_all_db_products_path, method: :post, class: 'button'
 .row
-    .columns.small-12
+    .columns.small-12.medium-6
         .news
             h5 Последние обновленные товары
             - base_date = ''
@@ -15,3 +15,9 @@
                     - base_date = date.strftime('%d.%m.%Y ')
                     h6= base_date
                 p= link_to "#{product[0].status} - #{product[0].name}", product
+    .columns.small-12.medium-6
+        .updates
+            h5 Последние изменения приложения
+            h6 20.04.2017
+            p В настройках теперь доступна функции "Опубликовать всё" для фото, которые вы еще не опубликовали.
+            p Добавлены всплывающие окна с результатами выполнения операций.

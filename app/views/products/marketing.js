@@ -1,0 +1,3 @@
+$(function() {
+    $('#marketing').foundation('open');
+});

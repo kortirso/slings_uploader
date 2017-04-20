@@ -45,7 +45,9 @@ class ProductsController < ApplicationController
     def mass_inserting
         if current_user.with_two_albums?
             CatalogPublishingJob.perform_later({user: current_user})
-            redirect_to categories_path
+            render :inserting_true
+        else
+            render :inserting_false
         end
     end
 
@@ -56,7 +58,7 @@ class ProductsController < ApplicationController
 
     def marketing
         CatalogMarketingJob.perform_later({user: current_user})
-        redirect_to categories_path
+        render :marketing
     end
 
     private
