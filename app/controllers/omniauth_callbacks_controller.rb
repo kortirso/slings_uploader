@@ -9,6 +9,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     private
 
     def provides_callback
+        return redirect_to root_path, flash: { error: 'Ошибка доступа ВК, зайдите позже' } if env['omniauth.auth'].nil?
         @user = User.find_for_oauth(env['omniauth.auth'])
         if @user
             sign_in_and_redirect @user, event: :authentication

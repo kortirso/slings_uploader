@@ -19,9 +19,11 @@ class User < ApplicationRecord
             return identity.user
         end
 
-        user = User.find_by(email: auth.info[:email])
+        email = auth.info[:email].empty? ? "#{auth.info[:name].downcase.split(' ').join('_')}@app.ru" : auth.info[:email]
+
+        user = User.find_by(email: email)
         if user.nil?
-            user = User.create(email: auth.info[:email], password: Devise.friendly_token[0,20], token: auth.credentials[:token])
+            user = User.create(email: email, password: Devise.friendly_token[0,20], token: auth.credentials[:token])
         else
             user.update(token: auth.credentials[:token])
         end

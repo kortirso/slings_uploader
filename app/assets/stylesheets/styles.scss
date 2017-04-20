@@ -53,6 +53,15 @@ nav {
     }
 }
 
+.error {
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: rgb(255, 0, 45);
+    border: 1px solid rgb(255, 0 , 0);
+    color: #FFF;
+    font-size: 14px;
+}
+
 .news, .updates {
     p {
         margin-bottom: 3px;
