@@ -44,7 +44,7 @@
                 .columns.small-12.medium-6
                     = form_tag :site, url: site_path(@site), method: :patch do |f|
                         = text_field_tag 'site[request_for_loading]', @site.settings['request_for_loading'], placeholder: 'http://ваш_сайт.ru/products'
-                        .need_key
+                        .check_box
                             = check_box_tag 'site[need_key]', true, @site.settings['need_key']
                             = label_tag 'site[need_key]', 'Нужен ли секретный ключ в запросе?'
                         .key_fields class="#{'visible' if @site.settings['need_key']}"

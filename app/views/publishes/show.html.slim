@@ -8,12 +8,15 @@
                 = f.input :price, placeholder: 'Цена товара', label: 'Цена'
                 = label_tag 'publish_album_id', 'Выберите альбом для загрузки'
                 = f.select :album_id, options_for_select(@albums)
-                .photos_check.columns.small-12.medium-6
+                .check_box.photos_check
                     = label_tag 'photos_check', 'Использовать все фото?'
                     = check_box_tag :photos_check
-                .to_market.columns.small-12.medium-6
+                .check_box.to_market
                     = label_tag 'to_market', "#{@publish.market_item_id.present? ? 'Обновить товар в группе' : 'Добавить товар в группу'}"
                     = check_box_tag :to_market
+                .check_box.to_site class="#{'visible' if current_user.site.settings['request_for_loading'].present?}"
+                    = label_tag 'to_site', 'Отправить данные на сайт'
+                    = check_box_tag :to_site
                 = f.button :submit, value: "#{@publish.is_published? ? 'Обновить публикацию' : 'Опубликовать'}"
                 = link_to 'Удалить публикацию', product_publish_path(@publish.product, @publish), method: :delete, data: { confirm: 'Товар будет удален из фотоальбома и товаров группы, Вы уверены?' }, class: 'button delete' if @publish.is_published? && current_user.vk_group.archive.is_set?
     .columns.small-12.large-6
