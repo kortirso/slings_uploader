@@ -3,8 +3,8 @@ class SitesController < ApplicationController
     before_action :find_site
 
     def update
-        #@site.update(site_params)
-        #redirect_to current_user
+        @site.update(settings: site_params)
+        redirect_to current_user
     end
 
     private
