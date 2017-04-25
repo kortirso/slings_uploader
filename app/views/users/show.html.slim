@@ -1,34 +1,46 @@
 .row
-    .columns.small-12.medium-6
-        h5 Настройки группы ВК
-        = simple_form_for @vk_group, url: vk_group_path(@vk_group), method: :patch do |f|
-            = f.input :group_id, placeholder: 'Идентификатор группы', label: false
-            p Добавить/Редактировать альбомы
-            .albums
-                = f.simple_fields_for :albums do |y|
-                    .row.album
-                        .columns.small-6= y.input :album_name, placeholder: 'Название альбома', label: false
-                        .columns.small-6= y.input :album_id, placeholder: 'Идентификатор альбома', label: false
-                = link_to 'Добавить альбом', '', class: 'duplicate_album button'
-            p Редактировать архивный альбом
-            .archive_album
-                = f.simple_fields_for :archive do |y|
-                    = y.input :album_id, placeholder: 'Идентификатор архивного альбома', label: false, value: @vk_group.archive.album_id
-            p= f.button :submit, value: 'Сохранить'
-    .columns.small-12.medium-6
-        h5 Публикация всех товаров
-        p
-            = "Вы можете использовать массовую публикацию фото в альбомы (и опубликовать таким образом фотографий - #{Product.count - current_user.publishes.count}). Но для этого у вас должны быть настроены 2 альбома с названиями "
-            b Слинги-рюкзаки
-            = " и "
-            b Май-слинги
-            = ", а также актуальными идентификаторами (если не выполнены условия, то при нажатии на кнопку реальная загрузка не запустится). Никакие данные при этом не удаляются, желательно загружать данные в пустые альбомы."
-        .columns.small-12.medium-6
-            p= image_tag 'instruction_6.jpg'
-        .clearfix
-        p= link_to 'Опубликовать всё', mass_inserting_products_path, method: :post, remote: true, class: 'button'
-        h5 Создание товаров для публикаций
-        p= "Для всех публикаций (таких у вас - #{current_user.publishes.where(market_item_id: nil).size}), для которых не был создан товар в группе вк, можно автоматически создать товары. К названию товара будет добавлен тип слинга, например, Май-слинг Божья коровка."
-        p Если вы хотите полностью контролировать процесс публикации товаров, то вам необходимо использовать выгрузку товаров через публикации.
-        p= link_to 'Создать все товары', marketing_products_path, method: :post, remote: true, class: 'button'
+    ul.tabs#tabs data-tabs=''
+        li.tabs-title.is-active
+            a href='#panel1' aria-selected='true' Интеграция в ВК
+        li.tabs-title
+            a href='#panel2' Интеграция с сайтом
+    .tabs-content data-tabs-content='tabs'
+        .tabs-panel.is-active#panel1
+            .row
+                .columns.small-12.medium-6
+                    p Идентификатор группы ВК
+                    = simple_form_for @vk_group, url: vk_group_path(@vk_group), method: :patch do |f|
+                        = f.input :group_id, placeholder: 'Идентификатор группы', label: false
+                        p Добавить/Редактировать альбомы
+                        .albums
+                            = f.simple_fields_for :albums do |y|
+                                .row.album
+                                    .columns.small-6= y.input :album_name, placeholder: 'Название альбома', label: false
+                                    .columns.small-6= y.input :album_id, placeholder: 'Идентификатор альбома', label: false
+                            = link_to 'Добавить альбом', '', class: 'duplicate_album button'
+                        p Редактировать архивный альбом
+                        .archive_album
+                            = f.simple_fields_for :archive do |y|
+                                = y.input :album_id, placeholder: 'Идентификатор архивного альбома', label: false, value: @vk_group.archive.album_id
+                        p= f.button :submit, value: 'Сохранить'
+                .columns.small-12.medium-6
+                    h5 Публикация всех товаров
+                    p
+                        = "Вы можете использовать массовую публикацию фото в альбомы (и опубликовать таким образом фотографий - #{Product.count - current_user.publishes.count}). Но для этого у вас должны быть настроены 2 альбома с названиями "
+                        b Слинги-рюкзаки
+                        = " и "
+                        b Май-слинги
+                        = ", а также актуальными идентификаторами (если не выполнены условия, то при нажатии на кнопку реальная загрузка не запустится). Никакие данные при этом не удаляются, желательно загружать данные в пустые альбомы."
+                    .columns.small-12.medium-6
+                        p= image_tag 'instruction_6.jpg'
+                    .clearfix
+                    p= link_to 'Опубликовать всё', mass_inserting_products_path, method: :post, remote: true, class: 'button'
+                    h5 Создание товаров для публикаций
+                    p= "Для всех публикаций (таких у вас - #{current_user.publishes.where(market_item_id: nil).size}), для которых не был создан товар в группе вк, можно автоматически создать товары. К названию товара будет добавлен тип слинга, например, Май-слинг Божья коровка."
+                    p Если вы хотите полностью контролировать процесс публикации товаров, то вам необходимо использовать выгрузку товаров через публикации.
+                    p= link_to 'Создать все товары', marketing_products_path, method: :post, remote: true, class: 'button'
+        .tabs-panel#panel2
+            .row
+                .columns.small-12.medium-6
+                .columns.small-12.medium-6
 = render 'shared/modals'
