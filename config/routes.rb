@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         post :marketing, on: :collection
     end
     resources :vk_groups, only: :update
+    resources :sites, only: :update
     resources :instructions, only: :index
 
     get 'welcome' => 'welcome#index', as: :welcome
