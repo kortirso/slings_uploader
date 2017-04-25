@@ -17,4 +17,14 @@ $(function() {
         });
         $(newNestedForm).insertAfter(nestedExchange);
     });
+
+    $('.need_key label').click(function(e) {
+        current = $(this).closest('div').children('input').is(':checked');
+        if(current == false) {
+            $('.key_fields').addClass('visible');
+        }
+        else {
+            $('.key_fields').removeClass('visible');
+        }
+    });
 });

@@ -9,6 +9,7 @@ class UsersController < ApplicationController
         @vk_group = current_user.vk_group
         @vk_group.albums.build
         @vk_group.build_archive if @vk_group.archive.nil?
+        @site = current_user.site
     end
 
     private
