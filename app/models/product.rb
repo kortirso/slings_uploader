@@ -61,8 +61,10 @@ class Product < ApplicationRecord
         albums = user.albums.get_list
 
         (Product.all.to_a - prod_pub).each do |product|
-            Publish.find_by(user: user, product: product).destroy
-            publishes.push Publish.create product: product, user: user, album_id: albums.assoc(product.category.name)[1]
+            unless product.deleted?
+                Publish.find_by(user: user, product: product).destroy
+                publishes.push Publish.create product: product, user: user, album_id: albums.assoc(product.category.name)[1]
+            end
         end
 
         publishes
