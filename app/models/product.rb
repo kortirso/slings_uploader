@@ -57,12 +57,11 @@ class Product < ApplicationRecord
     end
 
     def self.create_publishes(user, publishes = [])
-        prod_pub = user.publishes.includes(:product).collect { |pub| pub.product }
-        prod_all = Product.all.to_a
-
+        prod_pub = user.publishes.published_in_vk.includes(:product).collect { |pub| pub.product }
         albums = user.albums.get_list
 
-        (prod_all - prod_pub).each do |product|
+        (Product.all.to_a - prod_pub).each do |product|
+            Publish.find_by(user: user, product: product).destroy
             publishes.push Publish.create product: product, user: user, album_id: albums.assoc(product.category.name)[1]
         end
 

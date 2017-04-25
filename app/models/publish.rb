@@ -7,6 +7,9 @@ class Publish < ApplicationRecord
 
     validates :user_id, :product_id, presence: true
 
+    scope :published_in_vk, -> { where published: true }
+    scope :not_published_in_market, -> { where market_item_id: nil }
+
     after_create :fill_publish
 
     def product_image
