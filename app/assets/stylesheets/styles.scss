@@ -142,3 +142,27 @@ nav {
         }
     }
 }
+
+.key_fields {
+    display: none;
+    &.visible {
+        display: block;
+    }
+}
+
+.need_key {
+    position: relative;
+    height: 30px;
+    label {
+        padding-left: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+    }
+    input {
+        position: absolute;
+        top: 6px;
+        left: 0;
+    }
+}
