@@ -13,6 +13,7 @@ class PublishCreatingService
         photos_list.each do |photo|
             get_upload_url
             upload_image(photo)
+            next if upload_hash['error'].present?
             save_image(photo)
         end
         update_publish
