@@ -12,7 +12,7 @@ class SitePublishCreatingService
         begin
             uri = URI(generate_uri)
             req = Net::HTTP::Post.new(uri)
-            req.set_form_data(name: publish.name, caption: publish.caption, price: publish.price, category_name: publish.product.category.name)
+            req.set_form_data(name: publish.name, caption: publish.caption, price: publish.price, category_name: publish.product.category.name, image: "#{ENV['APP_HOST']}#{publish.product_image}")
             Net::HTTP.start(uri.hostname, uri.port) { |http| http.request(req) }
         rescue
             false

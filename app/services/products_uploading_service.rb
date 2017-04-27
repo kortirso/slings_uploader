@@ -16,7 +16,6 @@ class ProductsUploadingService
             get_album_info(album_id)
             handle_photos(album_name)
         end
-        Rails.logger.debug errors
     end
 
     private
