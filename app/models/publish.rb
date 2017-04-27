@@ -1,7 +1,6 @@
 class Publish < ApplicationRecord    
     belongs_to :user
     belongs_to :product
-    belongs_to :album
 
     has_many :attachments, dependent: :destroy
 
@@ -18,6 +17,10 @@ class Publish < ApplicationRecord
 
     def is_published?
         published
+    end
+
+    def album_of_publish
+        user.albums.find_by(album_id: self.album_id)
     end
 
     private
