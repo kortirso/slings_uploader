@@ -62,7 +62,7 @@ class Product < ApplicationRecord
 
         (Product.all.to_a - prod_pub).each do |product|
             unless product.deleted?
-                Publish.find_by(user: user, product: product).destroy
+                Publish.find_by(user: user, product: product).try(:destroy)
                 publishes.push Publish.create product: product, user: user, album_id: albums.assoc(product.category.name)[1]
             end
         end
