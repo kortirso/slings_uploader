@@ -253,7 +253,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
   if Rails.env.production?
-    config.omniauth :vkontakte, ENV['VKONTAKTE_APP_ID'], ENV['VKONTAKTE_APP_SECRET'], scope: 'friends,photos,email,groups,market', display: 'popup', lang: 'en', image_size: 'original', redirect_url: 'http://netloader.ru/users/auth/vkontakte/callback'
+    config.omniauth :vkontakte, ENV['VKONTAKTE_APP_ID'], ENV['VKONTAKTE_APP_SECRET'], scope: 'friends,photos,email,groups,market', display: 'popup', lang: 'en', image_size: 'original', redirect_url: 'https://netloader.ru/users/auth/vkontakte/callback'
   else
     config.omniauth :vkontakte, ENV['VKONTAKTE_APP_ID'], ENV['VKONTAKTE_APP_SECRET'], scope: 'friends,photos,email,groups,market', display: 'popup', lang: 'en', image_size: 'original'
   end
