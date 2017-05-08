@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425070902) do
+ActiveRecord::Schema.define(version: 20170507164020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20170425070902) do
     t.integer  "album_id"
     t.integer  "market_item_id"
     t.boolean  "published",      default: false
+    t.integer  "site_item_id"
     t.index ["album_id"], name: "index_publishes_on_album_id", using: :btree
     t.index ["product_id"], name: "index_publishes_on_product_id", using: :btree
     t.index ["user_id"], name: "index_publishes_on_user_id", using: :btree
