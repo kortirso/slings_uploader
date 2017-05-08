@@ -11,6 +11,10 @@
                 .check_box.photos_check
                     = label_tag 'photos_check', 'Использовать все фото?'
                     = check_box_tag :photos_check
+                p Выберите раздел, где необходимо добавить/редактировать данные
+                .check_box.to_vk
+                    = label_tag 'to_vk', "#{@publish.album_id.present? ? 'Обновить фото в альбоме' : 'Добавить фото в альбом'}"
+                    = check_box_tag :to_vk
                 .check_box.to_market
                     = label_tag 'to_market', "#{@publish.market_item_id.present? ? 'Обновить товар в группе' : 'Добавить товар в группу'}"
                     = check_box_tag :to_market
