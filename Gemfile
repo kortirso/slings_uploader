@@ -24,12 +24,14 @@ gem 'rmagick'
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
 gem 'simple_form'
+gem 'rest-client'
 
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-vkontakte'
-gem 'rest-client'
+
 gem 'sidekiq', '>= 4.2.10'
+gem 'redis-namespace'
 
 group :development do
     gem 'listen', '~> 3.0.5'
