@@ -30,7 +30,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-vkontakte'
 
-gem 'sidekiq', '>= 4.2.10'
+gem 'sidekiq', '5.0.0'
 gem 'redis-namespace'
 
 group :development do

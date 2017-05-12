@@ -2,7 +2,7 @@ require 'open-uri'
 
 class ProductsUploadingService
     GROUP_ID = -10329309
-    ALBUM_IDS = {'Слинги-рюкзаки' => 95176931, 'Май-слинги' => 93917967}
+    ALBUM_IDS = {'Слинги-рюкзаки' => 95176931, 'Май-слинги' => 93917967, 'Ткани' => 243920774}
 
     attr_reader :user, :photos_info, :errors
 
@@ -11,8 +11,9 @@ class ProductsUploadingService
         @errors = []
     end
 
-    def upload
-        ALBUM_IDS.each do |album_name, album_id|
+    def upload(group)
+        groups = group.nil? ? ALBUM_IDS : ALBUM_IDS.select{ |k, v| k == group }
+        groups.each do |album_name, album_id|
             get_album_info(album_id)
             handle_photos(album_name)
         end
@@ -31,13 +32,13 @@ class ProductsUploadingService
     end
 
     def create_product(photo_info, category_id, album_name)
-        return false if photo_info['text'].empty?
+        return false if photo_info['text'].empty? && album_name != 'Ткани'
 
         product_name = get_product_name(photo_info)
         product = Product.find_by(name: product_name, category_id: category_id)
         if product.nil?
-            product = Product.create name: product_name, price: get_product_price(photo_info, album_name).to_i, caption: photo_info['text'], category_id: category_id
-            product.publishes.create user: user, album_id: ALBUM_IDS['album_name'], published: true
+            product = Product.create! name: product_name, price: get_product_price(photo_info, album_name), caption: photo_info['text'], category_id: category_id
+            product.publishes.create user: user, album_id: ALBUM_IDS[album_name], published: true
         end
 
         download = open(photo_info[get_max_image_link(photo_info)])
@@ -49,19 +50,21 @@ class ProductsUploadingService
     end
 
     def get_product_name(photo_info)
-        photo_info['text'].lines.first.chomp.split(',')[-2].strip.delete('\"')
+        if photo_info['text'].blank?
+            "Ткань_#{photo_info['id']}"
+        else
+            photo_info['text'].lines.first.chomp.split(',')[-2].strip.delete('\"')
+        end
     end
 
     def get_product_price(photo_info, album_name)
+        return 0 if album_name == 'Ткани'
         price_line = photo_info['text'].lines.size > 2 ? photo_info['text'].lines[-2] : photo_info['text'].lines[-1]
-        if album_name == 'Слинги-рюкзаки'
-            if price_line.chomp.split(',').size == 1
-                return price_line.chomp.split(' ')[-2]
-            else
-                return price_line.chomp.split(',')[-1].split[0]
-            end
+        return price_line.split(' ')[0].to_i if album_name != 'Слинги-рюкзаки'
+        if price_line.chomp.split(',').size == 1
+            return price_line.chomp.split(' ')[-2].to_i
         else
-            return price_line.split(' ')[0]
+            return price_line.chomp.split(',')[-1].split[0].to_i
         end
     end
 

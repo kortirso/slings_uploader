@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
     end
 
     def mass_inserting
-        if current_user.with_two_albums?
+        if current_user.with_albums?
             CatalogPublishingJob.perform_later({user: current_user})
             render :inserting_true
         else
@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
     end
 
     def upload_all_db
-        CatalogUploadingJob.perform_later({user: current_user})
+        CatalogUploadingJob.perform_later({user: current_user, category: params[:category]})
         redirect_to categories_path
     end
 

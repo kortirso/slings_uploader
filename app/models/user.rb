@@ -36,10 +36,11 @@ class User < ApplicationRecord
         role == 'admin'
     end
 
-    def with_two_albums?
+    def with_albums?
         albs = albums.pluck(:album_name)
         return false unless albs.include? 'Слинги-рюкзаки'
         return false unless albs.include? 'Май-слинги'
+        return false unless albs.include? 'Ткани'
         true
     end
 
