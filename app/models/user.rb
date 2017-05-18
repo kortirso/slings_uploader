@@ -44,6 +44,10 @@ class User < ApplicationRecord
         true
     end
 
+    def with_valid_token?
+        self.updated_at + 1.day < Time.now
+    end
+
     private
 
     def create_sites_objects

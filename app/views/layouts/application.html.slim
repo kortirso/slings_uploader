@@ -9,5 +9,6 @@ html
     body
         = render 'shared/navigation' if user_signed_in?
         .inside
+            = render 'shared/token_error'
             = yield
         = render 'shared/metrics'
