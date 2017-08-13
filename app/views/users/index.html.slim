@@ -8,6 +8,9 @@
             - if Category.find_by(name: 'Ткани').products.size.zero?
                 p= link_to 'Заполнить БД из альбома с Тканями', upload_all_db_products_path({category: 'Ткани'}), method: :post, class: 'button'
 .row
+    .columns.small-12
+        p= "Ваш аккаунт зарегистрирован на почту - #{current_user.email}"
+.row
     .columns.small-12.medium-6
         .news
             h5 Последние обновленные товары
