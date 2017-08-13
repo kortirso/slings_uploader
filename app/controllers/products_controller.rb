@@ -8,15 +8,11 @@ class ProductsController < ApplicationController
         @publish = @product.publishes.find_by(user_id: current_user.id)
     end
 
-    def new
-        @categories = Category.get_list
-        @product = Product.new
-        @attachments = @product.attachments.build
-    end
+    def new; end
 
     def create
         product = Product.new(product_params)
-        if product.save
+        if params['product']['attachment'].present? && product.save
             params['product']['attachment']['image'].each { |image| product.attachments.create(image: image) }
             redirect_to product
         else
