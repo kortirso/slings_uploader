@@ -18,4 +18,6 @@
 
 # Ignore application configuration
 /config/application.yml
-/public/uploads
+/public/uploads/public/packs
+/public/packs-test
+/node_modules
