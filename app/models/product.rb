@@ -12,8 +12,7 @@ class Product < ApplicationRecord
     accepts_nested_attributes_for :attachments, allow_destroy: true
 
     validates :name, :category_id, :price, presence: true
-    validates :price, numericality: { only_integer: true, greater_than: 0 }, if: :price_for_sling?
-    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, unless: :price_for_sling?
+    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
     def slug_candidates
         [:name, [:name, :id]]
@@ -68,11 +67,5 @@ class Product < ApplicationRecord
         end
 
         publishes
-    end
-
-    private
-
-    def price_for_sling?
-        category.name != 'Ткани'
     end
 end
