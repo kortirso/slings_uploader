@@ -1,8 +1,2 @@
-= render 'shared/categories_navigation'
-.row
-    - @products.each do |product|
-        = link_to product do
-            .columns.small-6.medium-4.large-2.end
-                .block.catalog_block class="#{'published' if @publishes.include? product.id}"
-                    .catalog_image= image_tag product.primary_image_small
-                    = product.name.truncate(20)
+= render 'components/page/page' do
+  = render 'components/categories/categories', products: @products

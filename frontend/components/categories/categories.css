@@ -1,0 +1,20 @@
+.catalog_block {
+  text-align: center;
+  height: 275px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px 2px #ccc;
+  padding: 10px;
+
+  &.published {
+    background: #ddd;
+  }
+
+  .catalog_image {
+    height: 200px;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
