@@ -12,6 +12,7 @@ import "components/product_form/product_form";
 import "components/instructions/instructions";
 import "components/categories/categories";
 import "components/categories_navigation/categories_navigation";
+import "components/product/product";
 
 import Rails from "rails-ujs";
 

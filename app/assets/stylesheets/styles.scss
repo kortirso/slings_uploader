@@ -46,32 +46,6 @@ body {
   }
 }
 
-.product_block {
-  div {
-    margin-bottom: 5px;
-  }
-  .product_deleted {
-    color: red;
-  }
-  .product_image {
-    height: 200px;
-    img {
-      height: 100%;
-    }
-  }
-  .product_images {
-    img {
-      max-height: 75px;
-      margin: 0 5px 5px 0;
-    }
-  }
-  .product_caption {
-    p {
-      margin-bottom: 0;
-    }
-  }
-}
-
 .publish_block {
   textarea {
     height: 125px;
