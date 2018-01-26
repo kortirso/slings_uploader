@@ -1,0 +1,46 @@
+header {
+  background: linear-gradient(to bottom, #f5ffff 0%, #ffda2a 100%);
+
+  nav {
+    position: relative;
+    margin: 0 auto;
+    padding: 15px 0;
+
+    .login {
+      position: absolute;
+      right: 0;
+      top: 22px;
+
+      li {
+        a {
+          color: #000;
+        }
+      }
+    }
+
+    ul.menu {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin-right: 20px;
+
+        a {
+          color: #000;
+
+          &:visited {
+            color: #000;
+          }
+        }
+
+        &.logo {
+          img {
+            max-height: 38px;
+          }
+        }
+      }
+    }
+  }
+}

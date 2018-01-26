@@ -1,0 +1,6 @@
+= render 'components/navigation/navigation'
+.content
+  .container
+    = yield
+- if Rails.env.production?
+  = render 'components/metrics/metrics'

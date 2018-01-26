@@ -1,0 +1,41 @@
+- if current_user.is_admin?
+  .block
+    .row
+      .col-sm-12
+        h5 Функции администратора
+        p= link_to 'Добавить товар', new_product_path, class: 'btn btn-primary'
+        - if Product.count.zero?
+          p= link_to 'Заполнить БД из базовых альбомов', upload_all_db_products_path, method: :post, class: 'btn btn-primary'
+        /- if Category.find_by(name: 'Ткани').products.size.zero?
+          p= link_to 'Заполнить БД из альбома с Тканями', upload_all_db_products_path({category: 'Ткани'}), method: :post, class: 'button'
+.block
+  .row
+    .col-sm-12
+      p= "Ваш аккаунт зарегистрирован на почту - #{current_user.email}"
+- if current_user.try(:with_valid_token?)
+  .block
+    .row.token_error
+      .col-sm-12
+        span.error Истек срок действия токена безопасности для вконтакте, выйдите из приложения и авторизуйтесь снова.
+.block
+  .row
+    .col-sm-12.col-md-6
+      .news
+        h5 Последние обновленные товары
+        - base_date = ''
+        - last_products.each do |date, product|
+          - if date.strftime('%d.%m.%Y ') != base_date
+            - base_date = date.strftime('%d.%m.%Y ')
+            h6= base_date
+          p= link_to "#{product[0].status} - #{product[0].name}", product
+    .col-sm-12.col-md-6
+      .updates
+        h5 Последние изменения приложения
+        h6 12.05.2017
+        p Добавлена категория Ткани.
+        p Обновлена инструкция.
+        h6 26.04.2017
+        p Обновлена инструкция.
+        h6 20.04.2017
+        p В настройках теперь доступна функции "Опубликовать всё" для фото, которые вы еще не опубликовали.
+        p Добавлены всплывающие окна с результатами выполнения операций.

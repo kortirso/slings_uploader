@@ -8,27 +8,6 @@ body {
     font-family: 'PT Sans';
 }
 
-nav {
-    .top-bar {
-        background: linear-gradient(to bottom, #f5ffff 0%,#ffda2a 100%);
-        .menu {
-            background: none;
-            li {
-                &.logo {
-                    img {
-                        max-height: 38px;
-                    }
-                }
-                a {
-                    &.active {
-                        text-decoration: underline;
-                    }
-                }
-            }
-        }
-    }
-}
-
 .error {
     padding: 5px 10px;
     border-radius: 6px;
