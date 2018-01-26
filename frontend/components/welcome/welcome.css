@@ -1,0 +1,11 @@
+#auth_block {
+  margin-top: 100px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 4px 6px 2px #aaa;
+  text-align: center;
+
+  .social {
+    width: 32px;
+  }
+}

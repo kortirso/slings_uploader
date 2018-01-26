@@ -6,9 +6,5 @@ html lang='ru'
     = stylesheet_pack_tag 'application', media: 'all'
     = csrf_meta_tags
   body
-    = render 'shared/navigation'
-    .content
-      = render 'shared/token_error'
-      = yield
-    = render 'shared/metrics'
+    = yield
     = javascript_pack_tag 'application'

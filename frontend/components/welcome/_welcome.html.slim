@@ -1,0 +1,12 @@
+.content
+  .container
+    .row.justify-content-md-center
+      .col-md-6
+        #auth_block
+          h1 SlingsUploader
+          - if flash[:error].present?
+            p
+              span.error= flash[:error]
+          p В этом приложении вы сможете синхронизировать каталог продукции ТМ СлингУля с вашим сайтом, группой ВК, магазином ВК.
+          p Для дальнейшей работы вам необходимо войти в ваш аккаунт через ВК.
+          p= link_to image_tag(asset_pack_path('image/social-vkontakte.png'), class: 'social', alt: 'Войти через ВК'), user_vkontakte_omniauth_authorize_path, title: 'Войти через ВК'

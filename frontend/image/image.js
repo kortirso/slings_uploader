@@ -1,0 +1,10 @@
+import "./social-vkontakte.png";
+import "./instruction_1.jpg";
+import "./instruction_2.jpg";
+import "./instruction_3.jpg";
+import "./instruction_4.jpg";
+import "./instruction_5.jpg";
+import "./instruction_6.jpg";
+import "./instruction_7.jpg";
+import "./instruction_8.jpg";
+import "./logo.png";

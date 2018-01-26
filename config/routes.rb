@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-    devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks', sessions: 'sessions' }
+    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
 
-    resources :users, only: [:index, :show]
-    resources :categories, only: [:index, :show]
-    resources :products, except: [:index] do
-        resources :publishes, only: [:show, :create, :update, :destroy]
+    resources :users, only: %i[index show]
+    resources :categories, only: %i[index show]
+    resources :products, except: %i[index] do
+        resources :publishes, only: %i[show create update destroy]
         post :mass_inserting, on: :collection
         post :upload_all_db, on: :collection
         post :marketing, on: :collection
@@ -13,8 +13,6 @@ Rails.application.routes.draw do
     resources :sites, only: :update
     resources :instructions, only: :index
 
-    get 'welcome' => 'welcome#index', as: :welcome
-
     root to: 'users#index'
-    match "*path", to: "application#catch_404", via: :all
+    match '*path', to: 'application#catch_404', via: :all
 end

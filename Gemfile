@@ -7,7 +7,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'jquery-rails'
 gem 'rails', '5.1.4'
 gem 'therubyracer', platforms: :ruby
 
@@ -28,9 +27,6 @@ gem 'figaro'
 
 # Foundation for frontend
 gem 'foundation-rails', '6.4.1.3'
-
-# Auto-prefixing CSS for cross-browser compat.
-gem 'autoprefixer-rails', '6.7.6'
 
 # Use Slim as the templating engine. Better than ERB
 gem 'slim'
@@ -70,7 +66,7 @@ gem 'oj_mimic_json'
 
 # Add Webpack
 gem 'foreman'
-gem 'webpacker', '~> 3.0'
+gem 'webpacker', '3.2.1'
 gem 'webpacker-react', '~> 0.3.2'
 
 # Pagination
