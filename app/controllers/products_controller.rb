@@ -1,14 +1,17 @@
 class ProductsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create, :update, :mass_inserting, :upload_all_db, :marketing, :destroy]
+  skip_before_action :verify_authenticity_token, only: %i[create update mass_inserting upload_all_db marketing destroy]
   before_action :get_categories, only: :show
-  before_action :check_admin_role, except: [:show, :mass_inserting, :marketing]
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin_role, except: %i[show mass_inserting marketing]
+  before_action :find_product, only: %i[show edit update destroy]
 
   def show
     @publish = @product.publishes.find_by(user_id: current_user.id)
   end
 
-  def new; end
+  def new
+    @product = Product.new
+    @categories = Category.get_list
+  end
 
   def create
     product = Product.new(product_params)
@@ -63,6 +66,6 @@ class ProductsController < ApplicationController
   end
 
   private def product_params
-    params.require(:product).permit(:name, :caption, :price, :category_id)
+    params.require(:product).permit(:name, :caption, :price, :category_id, :attachment)
   end
 end
