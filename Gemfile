@@ -25,6 +25,9 @@ gem 'uglifier', '3.2.0'
 # Store secrets
 gem 'figaro'
 
+# Use Slim as the templating engine. Better than ERB
+gem 'slim'
+
 # File uploading
 gem 'carrierwave', '~> 1.0'
 gem 'rmagick'
@@ -32,9 +35,6 @@ gem 'rmagick'
 # Beautiful names
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
-
-# Beautiful forms
-gem 'simple_form', '3.5.0'
 
 # HTTP Client
 gem 'rest-client'
