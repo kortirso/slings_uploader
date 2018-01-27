@@ -8,6 +8,7 @@ import "components/navigation/navigation";
 import "components/metrics/metrics";
 
 import "components/users/users";
+import "components/integration/integration";
 import "components/product_form/product_form";
 import "components/instructions/instructions";
 import "components/categories/categories";

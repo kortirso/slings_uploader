@@ -21,17 +21,6 @@ body {
   text-align: center;
 }
 
-.news, .updates {
-  p {
-    margin-bottom: 3px;
-    &.updated {
-      a {
-        text-decoration: underline;
-      }
-    }
-  }
-}
-
 .block {
   box-shadow: 0 2px 6px 2px #CCC;
   padding: 15px;
@@ -57,31 +46,5 @@ body {
   img {
     max-width: 100%;
     max-height: 450px;
-  }
-}
-
-.key_fields, .to_site {
-  display: none;
-  &.visible {
-    display: block;
-  }
-}
-
-.check_box {
-  position: relative;
-  height: 30px;
-  label {
-    padding-left: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    cursor: pointer;
-  }
-  input {
-    position: absolute;
-    top: 6px;
-    left: 0;
-    cursor: pointer;
   }
 }

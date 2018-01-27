@@ -1,0 +1,41 @@
+.integration {
+  .tab-content {
+    .tab-pane {
+      padding: 20px 0;
+
+      h2 {
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  .key_fields,
+  .to_site {
+    display: none;
+
+    &.visible {
+      display: block;
+    }
+  }
+
+  .check_box {
+    position: relative;
+    height: 30px;
+
+    label {
+      padding-left: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    input {
+      position: absolute;
+      top: 6px;
+      left: 0;
+      cursor: pointer;
+    }
+  }
+}

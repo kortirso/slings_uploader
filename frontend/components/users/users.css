@@ -1,3 +1,16 @@
 .block {
   margin: 25px 0;
 }
+
+.news,
+.updates {
+  p {
+    margin-bottom: 3px;
+
+    &.updated {
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}
