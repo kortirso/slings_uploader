@@ -8,8 +8,8 @@ class VkGroupsController < ApplicationController
   end
 
   private def find_vk_group
-    @vk_group = VkGroup.find(params[:id])
-    render_not_found if @vk_group.user_id != current_user.id
+    @vk_group = VkGroup.find_by(id: params[:id])
+    render_not_found if @vk_group.nil? || @vk_group.user_id != current_user.id
   end
 
   private def vk_group_params

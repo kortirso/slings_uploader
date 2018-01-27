@@ -4,12 +4,12 @@ class SitesController < ApplicationController
 
   def update
     @site.update(settings: site_params)
-    redirect_to current_user
+    redirect_to integration_path(current_user)
   end
 
   private def find_site
-    @site = Site.find(params[:id])
-    render_not_found if @site.user_id != current_user.id
+    @site = Site.find_by(id: params[:id])
+    render_not_found if @site.nil? || @site.user_id != current_user.id
   end
 
   private def site_params
