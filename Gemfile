@@ -25,12 +25,6 @@ gem 'uglifier', '3.2.0'
 # Store secrets
 gem 'figaro'
 
-# Foundation for frontend
-gem 'foundation-rails', '6.4.1.3'
-
-# Use Slim as the templating engine. Better than ERB
-gem 'slim'
-
 # File uploading
 gem 'carrierwave', '~> 1.0'
 gem 'rmagick'
