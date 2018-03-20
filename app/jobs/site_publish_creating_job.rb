@@ -3,9 +3,9 @@ class SitePublishCreatingJob < ApplicationJob
 
   def perform(params)
     if params[:publish].site_item_id.nil?
-      SitePublishCreatingService.new({user: params[:user], publish: params[:publish], album_id: params[:album_id]}).create
+      SitePublishCreatingService.new(user: params[:user], publish: params[:publish], album_id: params[:album_id]).create
     else
-      SitePublishCreatingService.new({user: params[:user], publish: params[:publish], album_id: params[:album_id]}).update
+      SitePublishCreatingService.new(user: params[:user], publish: params[:publish], album_id: params[:album_id]).update
     end
   end
 end

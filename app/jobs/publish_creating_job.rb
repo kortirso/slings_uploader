@@ -3,9 +3,9 @@ class PublishCreatingJob < ApplicationJob
 
   def perform(params)
     if params[:publish].is_published?
-      PublishEditingService.new({user: params[:user], publish: params[:publish]}).editing
+      PublishEditingService.new(user: params[:user], publish: params[:publish]).editing
     else
-      PublishCreatingService.new({user: params[:user], publish: params[:publish], photos_check: params[:photos_check]}).publishing
+      PublishCreatingService.new(user: params[:user], publish: params[:publish], photos_check: params[:photos_check]).publishing
     end
   end
 end

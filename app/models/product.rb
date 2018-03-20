@@ -14,6 +14,8 @@ class Product < ApplicationRecord
   validates :name, :category_id, :price, presence: true
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  scope :not_deleted, -> { where(deleted: false) }
+
   def slug_candidates
     [:name, [:name, :id]]
   end

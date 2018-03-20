@@ -3,12 +3,12 @@ class CategoriesController < ApplicationController
   before_action :find_category, only: :show
 
   def index
-    @products = Product.order(updated_at: :desc).includes(:attachments)
+    @products = Product.not_deleted.order(updated_at: :desc).includes(:attachments)
     @publishes = current_user.publishes.pluck(:product_id)
   end    
 
   def show
-    @products = @category.products.order(updated_at: :desc).includes(:attachments)
+    @products = @category.products.not_deleted.order(updated_at: :desc).includes(:attachments)
     @publishes = current_user.publishes.pluck(:product_id)
   end
 

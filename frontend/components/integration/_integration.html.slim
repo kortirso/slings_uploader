@@ -35,7 +35,7 @@
               = "Для массовой публикации доступно фотографий - #{Product.count - current_user.publishes.published_in_vk.count}."
             p= link_to 'Опубликовать всё', mass_inserting_products_path, method: :post, remote: true, class: 'btn btn-primary'
             h5 Создание товаров для публикаций
-            p= "Для всех публикаций (кроме Тканей), для которых не был создан товар в группе вк (таких у вас - #{current_user.publishes.includes(:product).not_published_in_market.where('products.category_id != ?', Category.find_by(name: 'Ткани').id).references(:products).size}), можно автоматически создать товары. К названию товара будет добавлен тип слинга, например, Май-слинг Божья коровка."
+            p= "Для всех публикаций, для которых не был создан товар в группе вк (таких у вас - #{current_user.publishes.includes(:product).not_published_in_market.references(:products).size}), можно автоматически создать товары. К названию товара будет добавлен тип слинга, например, Май-слинг Божья коровка."
             p Если вы хотите полностью контролировать процесс публикации товаров, то вам необходимо использовать выгрузку товаров через публикации.
             p= link_to 'Создать все товары', marketing_products_path, method: :post, remote: true, class: 'btn btn-primary'
       #site.tab-pane.fade aria-labelledby='panel2' role='tabpanel'

@@ -1,0 +1,31 @@
+.block {
+  box-shadow: 0 2px 6px 2px #ccc;
+  padding: 15px;
+
+  .button {
+    margin: 0 10px 0 0;
+  }
+
+  h5 {
+    text-align: center;
+  }
+
+  .lined {
+    text-decoration: underline;
+  }
+}
+
+.publish_block {
+  textarea {
+    height: 125px;
+  }
+}
+
+.publish_photo {
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    max-height: 450px;
+  }
+}

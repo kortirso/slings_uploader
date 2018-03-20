@@ -3,7 +3,7 @@
     .col-sm-12.col-md-6
       .publish_block
         h1 Новый товар
-        = form_for product do |f|
+        = form_for @product do |f|
           .form-group= f.text_field :name, placeholder: 'Название товара', label: false, class: 'form-control'
           .form-group= f.text_area :caption, placeholder: 'Описание товара', label: false, class: 'form-control', size: '20x7'
           .form-group
@@ -11,7 +11,7 @@
             = f.text_field :price, placeholder: 'Цена товара', label: 'Цена', class: 'form-control'
           .form-group
             = label_tag 'product_category_id', 'Выберите категорию для загрузки'
-            = f.select :category_id, options_for_select(categories), {}, { class: 'form-control' }
-          .form-group= f.fields_for product.attachments.build do |y|
+            = f.select :category_id, options_for_select(@categories), {}, { class: 'form-control' }
+          .form-group= f.fields_for @product.attachments.build do |y|
             = y.file_field :image, multiple: true, class: 'form-control-file'
           .form-group= f.submit 'Создать', class: 'btn btn-primary'

@@ -1,12 +1,2 @@
-.row
-    .columns.small-12.medium-6
-        .block.publish_block
-            h5 Новый товар
-            = simple_form_for @product do |f|
-                = f.input :name, placeholder: 'Название товара', label: false
-                = f.input :caption, placeholder: 'Описание товара', label: false
-                = f.input :price, placeholder: 'Цена товара', label: 'Цена'
-                = label_tag 'product_category_id', 'Выберите категорию для загрузки'
-                = f.select :category_id, options_for_select(@categories)
-                = f.file_field :images, multiple: true
-                = f.button :submit, value: 'Сохранить'
+= render 'components/page/page' do
+  = render 'components/product_form/product_form'

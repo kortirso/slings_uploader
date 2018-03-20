@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
       params['product']['attachment']['image'].each { |image| product.attachments.create(image: image) }
       redirect_to product
     else
-      render :new
+      redirect_to new_product_path
     end
   end
 

@@ -5,7 +5,7 @@ class CatalogPublishingJob < ApplicationJob
     publishes = Product.create_publishes(params[:user])
 
     publishes.each do |publish|
-      PublishCreatingService.new({user: params[:user], publish: publish}).publishing
+      PublishCreatingService.new(user: params[:user], publish: publish).publishing
     end
   end
 end

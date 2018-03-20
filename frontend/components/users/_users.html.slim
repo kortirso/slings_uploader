@@ -6,8 +6,6 @@
         p= link_to 'Добавить товар', new_product_path, class: 'btn btn-primary'
         - if Product.count.zero?
           p= link_to 'Заполнить БД из базовых альбомов', upload_all_db_products_path, method: :post, class: 'btn btn-primary'
-        /- if Category.find_by(name: 'Ткани').products.size.zero?
-          p= link_to 'Заполнить БД из альбома с Тканями', upload_all_db_products_path({category: 'Ткани'}), method: :post, class: 'button'
 .block
   .row
     .col-sm-12

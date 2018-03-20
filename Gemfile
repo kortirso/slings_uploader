@@ -26,6 +26,7 @@ gem 'uglifier', '3.2.0'
 gem 'figaro'
 
 # Use Slim as the templating engine. Better than ERB
+gem 'simple_form'
 gem 'slim'
 
 # File uploading
