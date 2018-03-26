@@ -38,9 +38,9 @@ class User < ApplicationRecord
 
   def with_albums?
     albs = albums.pluck(:album_name)
-    return false unless albs.include? 'Слинги-рюкзаки'
-    return false unless albs.include? 'Май-слинги'
-    return false unless albs.include? 'Ткани'
+    return false unless albs.include? 'Базовая коллекция'
+    return false unless albs.include? 'Коллекция Весна-Лето'
+    return false unless albs.include? 'Коллекция Остатки сладки'
     true
   end
 
