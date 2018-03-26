@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.8.1'
+lock '3.10.1'
 
 set :application, 'slings_uploader'
 set :repo_url, 'git@github.com:kortirso/slings_uploader.git'
@@ -24,3 +24,18 @@ namespace :deploy do
 
     after :publishing, :restart
 end
+
+namespace :yarn do
+    desc 'Yarn'
+    task :install do
+        on roles(:app) do
+            within release_path do
+                with rails_env: fetch(:rails_env) do
+                    execute :bundle, 'exec yarn install'
+                end
+            end
+        end
+    end
+end
+
+after 'bundler:install', 'yarn:install'
