@@ -1,30 +1,30 @@
+# Represents publishes for products for different users
 class Publish < ApplicationRecord    
   belongs_to :user
   belongs_to :product
 
+  has_one_attached :image
+
   validates :user_id, :product_id, presence: true
 
-  scope :published_in_vk, -> { where published: true }
-  scope :not_published_in_market, -> { where market_item_id: nil }
+  scope :published_in_vk, -> { where(published: true) }
+  scope :not_published_in_market, -> { where(market_item_id: nil) }
 
   after_create :fill_publish
 
   def product_image
-    product.primary_image
+    image_content || product.image_content
   end
 
-  def is_published?
-    published
+  def image_content
+    image.attached? ? Base64.encode64(image.attachment.blob.download) : nil
   end
 
   def album_of_publish
-    user.albums.find_by(album_id: self.album_id)
+    user.albums.find_by(album_id: album_id)
   end
 
   private def fill_publish
-    self.name = product.name
-    self.caption = product.caption
-    self.price = product.price
-    self.save
+    update(name: product.name, caption: product.caption, price: product.price)
   end
 end

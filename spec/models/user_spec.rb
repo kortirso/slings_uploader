@@ -136,5 +136,36 @@ RSpec.describe User, type: :model do
         expect(user.admin?).to eq false
       end
     end
+
+    context '.with_albums?' do
+      let!(:user) { create :user }
+
+      context 'without albums' do
+        it 'returns false' do
+          expect(user.with_albums?).to eq false
+        end
+      end
+
+      context 'with albums' do
+        let!(:album_1) { create :album, album_name: 'Базовая коллекция', vk_group: user.vk_group }
+        let!(:album_2) { create :album, album_name: 'Коллекция Весна-Лето', vk_group: user.vk_group }
+        let!(:album_3) { create :album, album_name: 'Коллекция Остатки сладки', vk_group: user.vk_group }
+
+        it 'returns true' do
+          expect(user.with_albums?).to eq true
+        end
+      end
+    end
+
+    context '.with_valid_token?' do
+      let!(:user) { create :user }
+
+      it 'returns true for updated users' do
+        user.update(token: '123')
+        user.reload
+
+        expect(user.with_valid_token?).to eq true
+      end
+    end
   end
 end

@@ -28,15 +28,15 @@ class User < ApplicationRecord
   end
 
   def with_albums?
-    albs = albums.pluck(:album_name)
-    return false unless albs.include? 'Базовая коллекция'
-    return false unless albs.include? 'Коллекция Весна-Лето'
-    return false unless albs.include? 'Коллекция Остатки сладки'
+    album_names = albums.pluck(:album_name)
+    return false unless album_names.include?('Базовая коллекция')
+    return false unless album_names.include?('Коллекция Весна-Лето')
+    return false unless album_names.include?('Коллекция Остатки сладки')
     true
   end
 
   def with_valid_token?
-    self.updated_at + 1.day < Time.now
+    updated_at + 1.day > Time.now
   end
 
   private def create_sites_objects
