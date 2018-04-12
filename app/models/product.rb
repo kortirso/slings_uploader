@@ -8,8 +8,7 @@ class Product < ApplicationRecord
   belongs_to :category
 
   has_many :publishes
-  has_many :attachments, dependent: :destroy
-  accepts_nested_attributes_for :attachments, allow_destroy: true
+  has_many_attached :images
 
   validates :name, :category_id, :price, presence: true
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }

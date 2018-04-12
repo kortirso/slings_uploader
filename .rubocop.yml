@@ -9,6 +9,8 @@ AllCops:
     - vendor/**/*
     - bin/*
     - node_modules/**/*
+    - db/migrate/*
+    - app/services/**/*
 
 Metrics/AbcSize:
   Enabled: false

@@ -1,9 +1,7 @@
 RSpec.describe CategoriesController, type: :controller do
-    describe 'GET #index' do
+  describe 'GET #index' do
+  end
 
-    end
-
-    describe 'GET #show' do
-
-    end
+  describe 'GET #show' do
+  end
 end

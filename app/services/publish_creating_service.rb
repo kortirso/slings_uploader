@@ -17,6 +17,8 @@ class PublishCreatingService
             save_image(photo)
         end
         update_publish
+    rescue
+        nil
     end
 
     private

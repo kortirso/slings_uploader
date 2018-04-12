@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170507164020) do
+ActiveRecord::Schema.define(version: 2018_04_12_025507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,18 +30,6 @@ ActiveRecord::Schema.define(version: 20170507164020) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["vk_group_id"], name: "index_archives_on_vk_group_id"
-  end
-
-  create_table "attachments", id: :serial, force: :cascade do |t|
-    t.string "image"
-    t.integer "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "photo_id"
-    t.integer "parent_id"
-    t.integer "publish_id"
-    t.index ["product_id"], name: "index_attachments_on_product_id"
-    t.index ["publish_id"], name: "index_attachments_on_publish_id"
   end
 
   create_table "categories", id: :serial, force: :cascade do |t|

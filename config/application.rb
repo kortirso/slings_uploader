@@ -7,12 +7,14 @@ require 'active_record/railtie'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
-require 'carrierwave'
+require 'active_storage/engine'
 
 Bundler.require(*Rails.groups)
 
 module SlingsUploader
   class Application < Rails::Application
+    config.load_defaults 5.2
+
     ActiveModelSerializers.config.adapter = :json
 
     config.active_record.schema_format = :ruby

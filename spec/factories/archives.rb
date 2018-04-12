@@ -1,5 +1,4 @@
 FactoryBot.define do
-    factory :archive do
-    
-    end
+  factory :archive do
+  end
 end

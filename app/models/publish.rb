@@ -2,8 +2,6 @@ class Publish < ApplicationRecord
   belongs_to :user
   belongs_to :product
 
-  has_many :attachments, dependent: :destroy
-
   validates :user_id, :product_id, presence: true
 
   scope :published_in_vk, -> { where published: true }

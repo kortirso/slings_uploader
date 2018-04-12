@@ -1,5 +1,5 @@
 FactoryBot.define do
-    factory :site do
-        association :user
-    end
+  factory :site do
+    association :user
+  end
 end
