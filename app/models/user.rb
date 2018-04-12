@@ -8,31 +8,22 @@ class User < ApplicationRecord
   has_one :vk_group, dependent: :destroy
   has_many :albums, through: :vk_group
 
-  validates :role, presence: true, inclusion: { in: %w(user admin) }
+  validates :role, presence: true, inclusion: { in: %w[user admin] }
 
   after_create :create_sites_objects
 
   def self.find_for_oauth(auth)
     identity = Identity.find_for_oauth(auth)
-    if identity.present?
-      identity.user.update(token: auth.credentials[:token])
-      return identity.user
-    end
-
+    return identity.user if identity.present?
     email = auth.info[:email].empty? ? "#{auth.info[:name].downcase.split(' ').join('_')}@app.ru" : auth.info[:email]
-
-    user = User.find_by(email: email)
-    if user.nil?
-      user = User.create(email: email, password: Devise.friendly_token[0,20], token: auth.credentials[:token])
-    else
-      user.update(token: auth.credentials[:token])
+    user = User.find_or_create_by(email: email) do |u|
+      u.password = Devise.friendly_token[0, 20]
     end
     user.identities.create(provider: auth.provider, uid: auth.uid)
-
     user
   end
 
-  def is_admin?
+  def admin?
     role == 'admin'
   end
 

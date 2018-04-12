@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   private def check_admin_role
-    render template: 'shared/404', status: 404 unless current_user.is_admin?
+    render template: 'shared/404', status: 404 unless current_user.admin?
   end
 
   private def get_categories
