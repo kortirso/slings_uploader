@@ -23,7 +23,6 @@ class ProductsController < ApplicationController
 
   def edit
     @categories = Category.get_list
-    @attachments = @product.attachments.build
   end
 
   def update

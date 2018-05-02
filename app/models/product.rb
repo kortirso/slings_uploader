@@ -42,10 +42,6 @@ class Product < ApplicationRecord
     input.to_s.to_slug.normalize(transliterations: :russian).to_s
   end
 
-  def image_content
-    image.attached? ? Base64.encode64(image.attachment.blob.download) : nil
-  end
-
   def status
     if deleted?
       'Удален'

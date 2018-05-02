@@ -1,3 +1,4 @@
+# Represents groups in vk
 class VkGroup < ApplicationRecord
   belongs_to :user
 

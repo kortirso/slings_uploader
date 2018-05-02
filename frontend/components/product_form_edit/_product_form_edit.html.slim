@@ -2,7 +2,7 @@
   .row
     .col-sm-12.col-md-6
       .publish_block
-        h1 Новый товар
+        h1 Изменение товара
         = form_with model: product, local: true do |f|
           .form-group= f.text_field :name, placeholder: 'Название товара', label: false, class: 'form-control'
           .form-group= f.text_area :caption, placeholder: 'Описание товара', label: false, class: 'form-control', size: '20x7'

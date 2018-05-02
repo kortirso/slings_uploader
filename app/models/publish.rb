@@ -13,11 +13,7 @@ class Publish < ApplicationRecord
   after_create :fill_publish
 
   def product_image
-    image_content || product.image_content
-  end
-
-  def image_content
-    image.attached? ? Base64.encode64(image.attachment.blob.download) : nil
+    image.attached? ? image : product.image
   end
 
   def album_of_publish

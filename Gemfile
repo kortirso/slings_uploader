@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.5.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -22,10 +22,6 @@ gem 'figaro'
 # Use Slim as the templating engine. Better than ERB
 gem 'slim'
 
-# File uploading
-gem 'carrierwave', '~> 1.0'
-gem 'rmagick'
-
 # Beautiful names
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
@@ -42,7 +38,7 @@ gem 'omniauth-vkontakte'
 
 # Background Jobs
 gem 'redis-namespace'
-gem 'sidekiq', '5.0.5'
+gem 'sidekiq', '5.1.3'
 
 # Code analyzation
 gem 'rubocop', '~> 0.49.1', require: false
@@ -74,15 +70,12 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :development, :test do
-  gem 'database_cleaner'
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'rails-controller-testing'
-end
-
 group :test do
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
   gem 'json_spec'
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
