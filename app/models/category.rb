@@ -1,5 +1,6 @@
 require 'babosa'
 
+# Represents categories
 class Category < ApplicationRecord
   extend FriendlyId
 
@@ -13,7 +14,7 @@ class Category < ApplicationRecord
     input.to_s.to_slug.normalize(transliterations: :russian).to_s
   end
 
-  def self.get_list
+  def self.list
     all.collect { |category| [category.name, category.id] }
   end
 end

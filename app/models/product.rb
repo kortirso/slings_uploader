@@ -17,7 +17,7 @@ class Product < ApplicationRecord
   scope :not_deleted, -> { where(deleted: false) }
 
   class << self
-    def create_publishes(user, publishes = [], albums = user.albums.get_list)
+    def create_publishes(user, publishes = [], albums = user.albums.list)
       Product.unpublished(user).each do |product|
         Publish.find_by(user: user, product: product).try(:destroy)
         publishes << Publish.create(product: product, user: user, album_id: albums.assoc(product.category.name)[1])
@@ -30,7 +30,7 @@ class Product < ApplicationRecord
     end
 
     def published(user)
-      user.publishes.published_in_vk.includes(:product).collect { |pub| pub.product }
+      user.publishes.published_in_vk.includes(:product).collect(&:product)
     end
   end
 

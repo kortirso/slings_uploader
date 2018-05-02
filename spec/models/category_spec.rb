@@ -10,11 +10,11 @@ RSpec.describe Category, type: :model do
   end
 
   describe 'methods' do
-    context '.get_list' do
+    context '.list' do
       let!(:category) { create :category }
 
       it 'should return double array with category name and id' do
-        expect(Category.get_list).to eq [[category.name, category.id]]
+        expect(Category.list).to eq [[category.name, category.id]]
       end
     end
   end

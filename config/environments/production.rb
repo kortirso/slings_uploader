@@ -1,5 +1,5 @@
 Rails.application.configure do
-    # Verifies that versions and hashed value of the package contents in the project's package.json
+  # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
 
   config.active_storage.service = :local
@@ -52,7 +52,9 @@ Rails.application.configure do
   config.log_level = :error
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
+
+  config.action_mailer.default_url_options = { host: 'https://netloader.ru' }
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

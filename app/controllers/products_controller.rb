@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[create update mass_inserting upload_all_db marketing destroy]
-  before_action :get_categories, only: :show
+  before_action :select_categories, only: :show
   before_action :check_admin_role, except: %i[show mass_inserting marketing]
   before_action :find_product, only: %i[show edit update destroy]
 
@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @categories = Category.get_list
+    @categories = Category.list
   end
 
   def create
@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @categories = Category.get_list
+    @categories = Category.list
   end
 
   def update
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
 
   def mass_inserting
     if current_user.with_albums?
-      CatalogPublishingJob.perform_later({user: current_user})
+      CatalogPublishingJob.perform_later(user: current_user)
       render :inserting_true
     else
       render :inserting_false
@@ -48,12 +48,12 @@ class ProductsController < ApplicationController
   end
 
   def upload_all_db
-    CatalogUploadingJob.perform_later({user: current_user, category: params[:category]})
+    CatalogUploadingJob.perform_later(user: current_user, category: params[:category])
     redirect_to categories_path
   end
 
   def marketing
-    CatalogMarketingJob.perform_later({user: current_user})
+    CatalogMarketingJob.perform_later(user: current_user)
     render :marketing
   end
 

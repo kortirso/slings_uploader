@@ -1,6 +1,6 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    skip_before_action :get_access
+    skip_before_action :check_access
     before_action :provides_callback
 
     def vkontakte; end

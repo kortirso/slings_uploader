@@ -1,3 +1,4 @@
+# Signin module
 module ControllerMacros
   def sign_in_user
     before do

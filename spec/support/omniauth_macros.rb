@@ -14,10 +14,10 @@ module OmniauthMacros
       'extra' => {
         'raw_info' => {}
       },
-      "credentials"=> {
-        "token" => "123",
-        "expires_at" => 1381826003,
-        "expires" => true
+      'credentials' => {
+        'token' => '123',
+        'expires_at' => 1_381_826_003,
+        'expires' => true
       }
     )
   end
@@ -36,10 +36,10 @@ module OmniauthMacros
       'extra' => {
         'raw_info' => {}
       },
-      "credentials"=> {
-        "token" => "123",
-        "expires_at" => 1381826003,
-        "expires" => true
+      'credentials' => {
+        'token' => '123',
+        'expires_at' => 1_381_826_003,
+        'expires' => true
       }
     )
   end

@@ -14,7 +14,7 @@ class VkGroupsController < ApplicationController
 
   private def vk_group_params
     p = params.require(:vk_group).permit!.to_h
-    p['albums_attributes'].delete_if { |key, value| value['album_id'].empty? }
+    p['albums_attributes'].delete_if { |_key, value| value['album_id'].empty? }
     p
   end
 end

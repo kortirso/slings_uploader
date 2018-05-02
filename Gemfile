@@ -23,8 +23,8 @@ gem 'figaro'
 gem 'slim'
 
 # Beautiful names
-gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
+gem 'friendly_id', '~> 5.1.0'
 
 # HTTP Client
 gem 'rest-client'
@@ -74,8 +74,8 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'json_spec'
-  gem 'rspec-rails'
   gem 'rails-controller-testing'
+  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end

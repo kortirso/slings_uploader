@@ -2,12 +2,12 @@ class ApplicationController < ActionController::Base
   prepend_view_path Rails.root.join('frontend')
 
   protect_from_forgery with: :exception
-  before_action :get_access
+  before_action :check_access
 
   rescue_from ActionController::RoutingError, with: :render_not_found
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
-  private def get_access
+  private def check_access
     render template: 'welcome/index', layout: 'welcome' unless user_signed_in?
   end
 
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     render template: 'shared/404', status: 404 unless current_user.admin?
   end
 
-  private def get_categories
+  private def select_categories
     @categories = Category.all
   end
 

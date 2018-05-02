@@ -13,21 +13,6 @@ RSpec.describe Product, type: :model do
   end
 
   describe 'methods' do
-    context '.image_content' do
-      let!(:product) { create :product }
-
-      it 'returns nil for products without images' do
-        expect(product.image_content).to eq nil
-      end
-
-      it 'returns content for products with image' do
-        product.image.attach(io: File.open("#{Rails.root}/spec/test_files/1.jpg"), filename: 'image.jpg')
-        product.reload
-
-        expect(product.image_content).to_not eq nil
-      end
-    end
-
     context '.delete' do
       let!(:product) { create :product }
 

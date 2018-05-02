@@ -1,5 +1,5 @@
 # Represents publishes for products for different users
-class Publish < ApplicationRecord    
+class Publish < ApplicationRecord
   belongs_to :user
   belongs_to :product
 

@@ -12,6 +12,7 @@ require 'active_storage/engine'
 Bundler.require(*Rails.groups)
 
 module SlingsUploader
+  # Base class
   class Application < Rails::Application
     config.load_defaults 5.2
 

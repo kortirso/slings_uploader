@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   has_many :identities, dependent: :destroy
   has_many :publishes, dependent: :destroy
-  
+
   has_one :site, dependent: :destroy
   has_one :vk_group, dependent: :destroy
   has_many :albums, through: :vk_group

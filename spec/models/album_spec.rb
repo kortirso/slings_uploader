@@ -11,11 +11,11 @@ RSpec.describe Album, type: :model do
   end
 
   describe 'methods' do
-    context '.get_list' do
+    context '.list' do
       let!(:album) { create :album }
 
       it 'should return double array with album name and id' do
-        expect(Album.get_list).to eq [[album.album_name, album.album_id]]
+        expect(Album.list).to eq [[album.album_name, album.album_id]]
       end
     end
   end
