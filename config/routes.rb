@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
 
   resources :users, only: %i[index]
@@ -15,5 +16,4 @@ Rails.application.routes.draw do
   resources :instructions, only: :index
 
   root to: 'users#index'
-  match '*path', to: 'application#catch_404', via: :all
 end

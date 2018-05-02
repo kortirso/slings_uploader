@@ -9,7 +9,7 @@ import "components/metrics/metrics";
 
 import "components/users/users";
 import "components/integration/integration";
-import "components/product_form/product_form";
+import "components/product_form_new/product_form_new";
 import "components/instructions/instructions";
 import "components/categories/categories";
 import "components/categories_navigation/categories_navigation";

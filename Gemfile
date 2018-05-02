@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '2.3.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -60,8 +60,8 @@ gem 'webpacker-react', '~> 0.3.2'
 # Pagination
 gem 'kaminari'
 
-# Mailer
-gem 'premailer-rails'
+# Admin panel
+gem 'rails_admin', '1.3.0'
 
 group :development do
   gem 'capistrano', require: false

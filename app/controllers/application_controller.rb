@@ -2,15 +2,10 @@ class ApplicationController < ActionController::Base
   prepend_view_path Rails.root.join('frontend')
 
   protect_from_forgery with: :exception
-
   before_action :get_access
 
   rescue_from ActionController::RoutingError, with: :render_not_found
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-
-  def catch_404
-    raise ActionController::RoutingError.new(params[:path]), 'route error'
-  end
 
   private def get_access
     render template: 'welcome/index', layout: 'welcome' unless user_signed_in?

@@ -17,7 +17,7 @@
           - product.caption.each_line do |line|
             p= line
         .product_price.lined= "#{product.price} руб."
-        - if current_user.is_admin? && !product.deleted?
+        - if current_user.admin? && !product.deleted?
           p= link_to 'Редактировать товар', edit_product_path(product), class: 'btn btn-primary'
           p= link_to 'Удалить товар', product, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-primary'
     .col-sm-12.col-lg-6

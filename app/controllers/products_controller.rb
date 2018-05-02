@@ -9,14 +9,12 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
     @categories = Category.get_list
   end
 
   def create
     product = Product.new(product_params)
-    if params['product']['attachment'].present? && product.save
-      params['product']['attachment']['image'].each { |image| product.attachments.create(image: image) }
+    if product.save
       redirect_to product
     else
       redirect_to new_product_path
@@ -66,6 +64,6 @@ class ProductsController < ApplicationController
   end
 
   private def product_params
-    params.require(:product).permit(:name, :caption, :price, :category_id, :attachment)
+    params.require(:product).permit(:name, :caption, :price, :category_id, :image)
   end
 end
