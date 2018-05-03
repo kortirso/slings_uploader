@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :album do
-    album_id 12_345_678
-    album_name 'Just Name'
+    identifier 12_345_678
+    name 'Just Name'
     association :vk_group
   end
 end

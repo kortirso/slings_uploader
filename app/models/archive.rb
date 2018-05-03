@@ -5,6 +5,6 @@ class Archive < ApplicationRecord
   validates :vk_group_id, presence: true
 
   def set?
-    album_id.present?
+    identifier.present?
   end
 end

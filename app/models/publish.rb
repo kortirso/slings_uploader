@@ -8,7 +8,7 @@ class Publish < ApplicationRecord
   validates :user_id, :product_id, presence: true
 
   scope :published_in_vk, -> { where(published: true) }
-  scope :not_published_in_market, -> { where(market_item_id: nil) }
+  scope :not_published_in_market, -> { where(market_item: nil) }
 
   after_create :fill_publish
 
@@ -17,7 +17,7 @@ class Publish < ApplicationRecord
   end
 
   def album_of_publish
-    user.albums.find_by(album_id: album_id)
+    user.albums.find_by(identifier: vk_item)
   end
 
   private def fill_publish

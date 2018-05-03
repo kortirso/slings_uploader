@@ -18,8 +18,8 @@ RSpec.describe Publish, type: :model do
   describe 'methods' do
     context '.album_of_publish' do
       let!(:user) { create :user }
-      let!(:album) { create :album, album_name: 'Базовая коллекция', vk_group: user.vk_group }
-      let!(:publish) { create :publish, album_id: album.album_id, user: user }
+      let!(:album) { create :album, name: 'Базовая коллекция', vk_group: user.vk_group }
+      let!(:publish) { create :publish, vk_item: album.identifier, user: user }
 
       it 'returns album object' do
         expect(publish.album_of_publish).to eq album

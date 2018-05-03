@@ -147,9 +147,9 @@ RSpec.describe User, type: :model do
       end
 
       context 'with albums' do
-        let!(:album_1) { create :album, album_name: 'Базовая коллекция', vk_group: user.vk_group }
-        let!(:album_2) { create :album, album_name: 'Коллекция Весна-Лето', vk_group: user.vk_group }
-        let!(:album_3) { create :album, album_name: 'Коллекция Остатки сладки', vk_group: user.vk_group }
+        let!(:album_1) { create :album, name: 'Базовая коллекция', vk_group: user.vk_group }
+        let!(:album_2) { create :album, name: 'Коллекция Весна-Лето', vk_group: user.vk_group }
+        let!(:album_3) { create :album, name: 'Коллекция Остатки сладки', vk_group: user.vk_group }
 
         it 'returns true' do
           expect(user.with_albums?).to eq true

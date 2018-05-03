@@ -18,7 +18,7 @@ class PublishesController < ApplicationController
   end
 
   def update
-    PublishCreatingJob.perform_later(user: current_user, publish: @publish, photos_check: params[:photos_check]) if params[:to_vk].present? && @publish.update(publish_params)
+    PublishCreatingJob.perform_later(user: current_user, publish: @publish) if params[:to_vk].present? && @publish.update(publish_params)
     MarketPublishCreatingJob.perform_later(user: current_user, publish: @publish) if params[:to_market].present?
     SitePublishCreatingJob.perform_later(user: current_user, publish: @publish, album_id: publish_params[:album_id]) if params[:to_site].present?
     redirect_to @publish.product

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_12_043714) do
+ActiveRecord::Schema.define(version: 2018_05_03_092030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,17 +37,17 @@ ActiveRecord::Schema.define(version: 2018_04_12_043714) do
   end
 
   create_table "albums", id: :serial, force: :cascade do |t|
-    t.integer "album_id"
+    t.integer "identifier"
     t.integer "vk_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "album_name", default: ""
+    t.string "name", default: ""
     t.index ["vk_group_id"], name: "index_albums_on_vk_group_id"
   end
 
   create_table "archives", id: :serial, force: :cascade do |t|
     t.integer "vk_group_id"
-    t.integer "album_id"
+    t.integer "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["vk_group_id"], name: "index_archives_on_vk_group_id"
@@ -104,11 +104,10 @@ ActiveRecord::Schema.define(version: 2018_04_12_043714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", default: "", null: false
-    t.integer "album_id"
-    t.integer "market_item_id"
+    t.integer "market_item"
     t.boolean "published", default: false
-    t.integer "site_item_id"
-    t.index ["album_id"], name: "index_publishes_on_album_id"
+    t.integer "site_item"
+    t.integer "vk_item"
     t.index ["product_id"], name: "index_publishes_on_product_id"
     t.index ["user_id"], name: "index_publishes_on_user_id"
   end
@@ -144,7 +143,7 @@ ActiveRecord::Schema.define(version: 2018_04_12_043714) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "group_id"
+    t.string "identifier"
     t.index ["user_id"], name: "index_vk_groups_on_user_id"
   end
 

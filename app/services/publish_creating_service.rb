@@ -2,9 +2,9 @@
 class PublishCreatingService
   attr_reader :user, :publish, :photo_url
 
-  def initialize(params)
-    @user = params[:user]
-    @publish = params[:publish]
+  def initialize(args = {})
+    @user = args[:user]
+    @publish = args[:publish]
     @photo_url = publish.product.image_url
   end
 

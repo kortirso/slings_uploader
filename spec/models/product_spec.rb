@@ -73,7 +73,7 @@ RSpec.describe Product, type: :model do
       end
 
       context '.create_publishes' do
-        let!(:album) { create :album, album_name: 'Базовая коллекция', vk_group: user.vk_group }
+        let!(:album) { create :album, name: 'Базовая коллекция', vk_group: user.vk_group }
 
         it 'creates new publish for product' do
           expect { Product.create_publishes(user) }.to change { products.last.publishes.count }.by(1)

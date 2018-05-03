@@ -1,8 +1,7 @@
 RSpec.describe Album, type: :model do
   it { should belong_to :vk_group }
-  it { should have_many :publishes }
   it { should validate_presence_of :vk_group_id }
-  it { should validate_presence_of :album_id }
+  it { should validate_presence_of :identifier }
 
   it 'should be valid' do
     album = create :album
@@ -15,7 +14,7 @@ RSpec.describe Album, type: :model do
       let!(:album) { create :album }
 
       it 'should return double array with album name and id' do
-        expect(Album.list).to eq [[album.album_name, album.album_id]]
+        expect(Album.list).to eq [[album.name, album.identifier]]
       end
     end
   end

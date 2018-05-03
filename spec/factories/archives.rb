@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :archive do
-    album_id 123
+    identifier 123
     association :vk_group
 
     trait :without_album do
-      album_id nil
+      identifier nil
     end
   end
 end
