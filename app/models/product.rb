@@ -16,6 +16,8 @@ class Product < ApplicationRecord
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   scope :not_deleted, -> { where(deleted: false) }
+  scope :lasts, -> { order(updated_at: :desc) }
+  scope :for_catalog, -> { not_deleted.lasts.with_attached_image }
 
   class << self
     def create_publishes(user, publishes = [], albums = user.albums.list)
