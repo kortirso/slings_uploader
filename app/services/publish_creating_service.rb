@@ -1,47 +1,32 @@
 # Create publishes in VK
 class PublishCreatingService
-  attr_reader :user, :publish, :photos_check, :photos_list, :upload_url, :upload_hash
+  attr_reader :user, :publish, :photo_url
 
   def initialize(params)
     @user = params[:user]
     @publish = params[:publish]
-    @photos_check = params[:photos_check]
-    @photos_list = []
+    @photo_url = publish.product.image_url
   end
 
   def publishing
-    select_photos_list
-    photos_list.each do |photo|
-      upload_url
-      upload_image(photo)
-      next if upload_hash['error'].present?
-      save_image(photo)
-    end
+    return nil if upload_hash['error'].present?
+    save_image
     update_publish
   rescue
     nil
   end
 
-  private def select_photos_list
-    if photos_check.nil?
-      photos_list.push publish.product.attachments.first
-    else
-      publish.product.attachments.each { |a| photos_list.push a }
-    end
-  end
-
   private def upload_url
-    response = VK::Photos::GetUploadServerService.call(token: user.token, album_id: publish.album_id, group_id: user.vk_group.group_id)
-    @upload_url = response['response']['upload_url']
+    @upload_url ||= VK::Photos::GetUploadServerService.call(token: user.token, album_id: publish.album_id, group_id: user.vk_group.group_id)['response']['upload_url']
   end
 
-  private def upload_image(photo)
-    @upload_hash = VK::Photos::UploadImageService.call(upload_url: upload_url, image_path: photo.image.to_s)
+  private def upload_hash
+    @upload_hash ||= VK::Photos::UploadImageService.call(upload_url: upload_url, image_path: photo_url)
   end
 
-  private def save_image(photo)
-    response = VK::Photos::SaveService.call(token: user.token, album_id: publish.album_id, group_id: user.vk_group.group_id, caption: publish.caption, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash'])
-    publish.attachments.create photo_id: response['response'][0]['id'], parent: photo
+  private def save_image
+    VK::Photos::SaveService.call(token: user.token, album_id: publish.album_id, group_id: user.vk_group.group_id, caption: publish.caption, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash'])
+    # publish.attachments.create photo_id: response['response'][0]['id'], parent: photo
   end
 
   private def update_publish

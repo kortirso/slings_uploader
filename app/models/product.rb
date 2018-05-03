@@ -2,6 +2,7 @@ require 'babosa'
 
 # Represents products
 class Product < ApplicationRecord
+  include Rails.application.routes.url_helpers
   extend FriendlyId
 
   friendly_id :slug_candidates, use: :slugged
@@ -32,6 +33,11 @@ class Product < ApplicationRecord
     def published(user)
       user.publishes.published_in_vk.includes(:product).collect(&:product)
     end
+  end
+
+  def image_url
+    return nil unless image.attached?
+    rails_blob_url(image, disposition: 'attachment', only_path: true)
   end
 
   def slug_candidates
