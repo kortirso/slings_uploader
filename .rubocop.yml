@@ -10,7 +10,6 @@ AllCops:
     - bin/*
     - node_modules/**/*
     - db/migrate/*
-    - app/services/**/*
     - app/jobs/**/*
 
 Metrics/AbcSize:
