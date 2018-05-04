@@ -289,4 +289,36 @@ RSpec.describe ProductsController, type: :controller do
       delete :destroy, params: { id: 999, product: {} }
     end
   end
+
+  describe 'POST #mass_inserting' do
+    it_behaves_like 'Check access'
+
+    context 'for logged user' do
+      sign_in_user
+
+      context 'for invalid params' do
+        it 'does not call perform for CatalogPublishingJob' do
+          expect(CatalogPublishingJob).to_not receive(:perform_later)
+
+          post :mass_inserting
+        end
+      end
+
+      context 'for valid params' do
+        let!(:album1) { create :album, name: 'Базовая коллекция', vk_group: @current_user.vk_group }
+        let!(:album2) { create :album, name: 'Коллекция Весна-Лето', vk_group: @current_user.vk_group }
+        let!(:album3) { create :album, name: 'Коллекция Остатки сладки', vk_group: @current_user.vk_group }
+
+        it 'calls perform for CatalogPublishingJob' do
+          expect(CatalogPublishingJob).to receive(:perform_later)
+
+          post :mass_inserting
+        end
+      end
+    end
+
+    def do_request
+      post :mass_inserting
+    end
+  end
 end
