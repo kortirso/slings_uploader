@@ -10,7 +10,7 @@
   .row
     .col-sm-12
       p= "Ваш аккаунт зарегистрирован на почту - #{current_user.email}"
-- if current_user.try(:with_valid_token?)
+- unless current_user.with_valid_token?
   .block
     .row.token_error
       .col-sm-12

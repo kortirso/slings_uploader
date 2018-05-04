@@ -11,7 +11,6 @@ class PublishCreatingService
   def publishing
     return nil if upload_hash['error'].present?
     save_image
-    update_publish
   rescue
     nil
   end
@@ -25,11 +24,7 @@ class PublishCreatingService
   end
 
   private def save_image
-    VK::Photos::SaveService.call(token: user.token, album_id: publish.album_id, group_id: user.vk_group.group_id, caption: publish.caption, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash'])
-    # publish.attachments.create photo_id: response['response'][0]['id'], parent: photo
-  end
-
-  private def update_publish
-    publish.update(published: true)
+    response = VK::Photos::SaveService.call(token: user.token, album_id: publish.album_id, group_id: user.vk_group.group_id, caption: publish.caption, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash'])
+    publish.update(published: true, vk_photo_identifier: response['response'][0]['id'])
   end
 end

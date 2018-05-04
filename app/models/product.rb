@@ -12,7 +12,7 @@ class Product < ApplicationRecord
   has_many :publishes
   has_one_attached :image
 
-  validates :name, :category_id, :price, presence: true
+  validates :name, :category, :price, presence: true
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   scope :not_deleted, -> { where(deleted: false) }
@@ -35,6 +35,11 @@ class Product < ApplicationRecord
     def published(user)
       user.publishes.published_in_vk.includes(:product).collect(&:product)
     end
+  end
+
+  def image_content
+    return nil unless image.attached?
+    image
   end
 
   def image_url

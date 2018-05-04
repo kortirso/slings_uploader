@@ -8,7 +8,9 @@
         h2.product_name.lined= product.name
         - if product.deleted?
           .product_deleted= 'ПРОДУКТ УДАЛЕН'
-        .product_image= image_tag product.image, class: 'img-fluid'
+        .product_image
+          - if product.image.attached?
+            = image_tag product.image, class: 'img-fluid'
         .product_caption
           h3.lined Описание
           - product.caption.each_line do |line|
@@ -22,13 +24,15 @@
         h2 Публикации
         - if @publish.present?
           .product_name.lined= @publish.name
-          .product_image= image_tag @publish.product_image, class: 'img-fluid'
+          .product_image
+            - if @publish.product_image.present?
+              = image_tag @publish.product_image, class: 'img-fluid'
           .product_caption
             p.lined Описание
             - @publish.caption.each_line do |line|
               p= line
           .product_price.lined= "#{@publish.price} руб."
-          = link_to 'Редактировать публикацию', product_publish_path(product, @publish), class: 'btn btn-primary'
-          = link_to 'Удалить публикацию', product_publish_path(@publish.product, @publish), method: :delete, data: { confirm: 'Товар будет удален из фотоальбома и товаров группы, Вы уверены?' }, class: 'button delete' if @publish.published? && current_user.vk_group.archive.is_set?
+          p= link_to 'Редактировать публикацию', product_publish_path(product, @publish), class: 'btn btn-primary'
+          = link_to 'Удалить публикацию', product_publish_path(@publish.product, @publish), method: :delete, data: { confirm: 'Товар будет удален из фотоальбома и товаров группы, Вы уверены?' }, class: 'btn btn-danger' if @publish.published? && current_user.vk_group.archive.set?
         - else
           = link_to 'Подготовить публикацию', product_publishes_path(product), class: 'btn btn-primary', method: :post

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_03_092030) do
+ActiveRecord::Schema.define(version: 2018_05_04_032921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_092030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", default: ""
+    t.integer "old_id"
     t.index ["vk_group_id"], name: "index_albums_on_vk_group_id"
   end
 
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_092030) do
     t.integer "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "old_id"
     t.index ["vk_group_id"], name: "index_archives_on_vk_group_id"
   end
 
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_092030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "single_name", default: ""
+    t.integer "old_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
@@ -92,6 +95,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_092030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "deleted", default: false
+    t.integer "old_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
   end
@@ -108,6 +112,8 @@ ActiveRecord::Schema.define(version: 2018_05_03_092030) do
     t.boolean "published", default: false
     t.integer "site_item"
     t.integer "vk_item"
+    t.integer "old_id"
+    t.string "vk_photo_identifier"
     t.index ["product_id"], name: "index_publishes_on_product_id"
     t.index ["user_id"], name: "index_publishes_on_user_id"
   end
@@ -135,6 +141,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_092030) do
     t.datetime "updated_at", null: false
     t.string "token", default: ""
     t.string "role", default: "user", null: false
+    t.integer "old_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -144,6 +151,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_092030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "identifier"
+    t.integer "old_id"
     t.index ["user_id"], name: "index_vk_groups_on_user_id"
   end
 

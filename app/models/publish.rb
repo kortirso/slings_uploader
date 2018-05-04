@@ -5,7 +5,7 @@ class Publish < ApplicationRecord
 
   has_one_attached :image
 
-  validates :user_id, :product_id, presence: true
+  validates :user, :product, presence: true
 
   scope :published_in_vk, -> { where(published: true) }
   scope :not_published_in_market, -> { where(market_item: nil) }
@@ -13,7 +13,7 @@ class Publish < ApplicationRecord
   after_create :fill_publish
 
   def product_image
-    image.attached? ? image : product.image
+    image.attached? ? image : product.image_content
   end
 
   def album_of_publish

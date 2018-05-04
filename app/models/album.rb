@@ -2,7 +2,7 @@
 class Album < ApplicationRecord
   belongs_to :vk_group
 
-  validates :vk_group_id, :identifier, presence: true
+  validates :vk_group, :identifier, presence: true
 
   def self.list
     all.collect { |album| [album.name, album.identifier] }

@@ -1,26 +1,27 @@
 .row
   .col-sm-12.col-lg-6
     .block.publish_block
-      h5= "Публикация товара #{@publish.name}"
+      h1= "Публикация товара #{@publish.name}"
       = form_with model: @publish, url: product_publish_path(@publish.product, @publish), method: :patch, local: true do |f|
-        .form-group= f.text_field :name, placeholder: 'Название товара', label: 'Название'
-        .form-group= f.text_field :caption, placeholder: 'Описание товара', label: 'Описание'
-        .form-group= f.text_field :price, placeholder: 'Цена товара', label: 'Цена'
+        .form-group= f.text_field :name, placeholder: 'Название товара', label: 'Название', class: 'form-control'
+        .form-group= f.text_field :caption, placeholder: 'Описание товара', label: 'Описание', class: 'form-control'
+        .form-group= f.text_field :price, placeholder: 'Цена товара', label: 'Цена', class: 'form-control'
         .form-group
           = label_tag 'publish_album_id', 'Выберите альбом для загрузки'
-          p= f.select :album_id, options_for_select(@albums, @publish.album_id.nil? ? nil :@publish.album_of_publish.album_id)
+          p= f.select :album_id, options_for_select(@albums, @publish.vk_item.nil? ? nil : @publish.album_of_publish.identifier), class: 'form-control'
         p Выберите раздел, где необходимо добавить/редактировать данные
         .check_box.to_vk
           = check_box_tag :to_vk
-          = label_tag 'to_vk', "#{@publish.album_id.present? ? 'Обновить фото в альбоме' : 'Добавить фото в альбом'}"
+          = label_tag 'to_vk', "#{@publish.vk_item.present? ? 'Обновить фото в альбоме' : 'Добавить фото в альбом'}"
         .check_box.to_market
           = check_box_tag :to_market
-          = label_tag 'to_market', "#{@publish.market_item_id.present? ? 'Обновить товар в группе' : 'Добавить товар в группу'}"
+          = label_tag 'to_market', "#{@publish.market_item.present? ? 'Обновить товар в группе' : 'Добавить товар в группу'}"
         .check_box.to_site class="#{'visible' if current_user.site.settings['request_for_loading'].present?}"
           = check_box_tag :to_site
           = label_tag 'to_site', 'Отправить данные на сайт'
-        = f.submit 'Save', value: "#{@publish.published? ? 'Обновить публикацию' : 'Опубликовать'}", class: 'btn btn-primary'
-        = link_to 'Удалить публикацию', product_publish_path(@publish.product, @publish), method: :delete, data: { confirm: 'Товар будет удален из фотоальбома и товаров группы, Вы уверены?' }, class: 'button delete' if @publish.published? && current_user.vk_group.archive.is_set?
+        p= f.submit 'Save', value: "#{@publish.published? ? 'Обновить публикацию' : 'Опубликовать'}", class: 'btn btn-primary'
+        = link_to 'Удалить публикацию', product_publish_path(@publish.product, @publish), method: :delete, data: { confirm: 'Товар будет удален из фотоальбома и товаров группы, Вы уверены?' }, class: 'btn btn-danger' if @publish.published? && current_user.vk_group.archive.set?
   .col-sm-12.col-lg-6
     .block.publish_photo
-      = image_tag @publish.product_image
+      - if @publish.product_image.present?
+        = image_tag @publish.product_image

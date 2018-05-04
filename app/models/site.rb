@@ -2,5 +2,5 @@
 class Site < ApplicationRecord
   belongs_to :user
 
-  validates :user_id, presence: true
+  validates :user, presence: true
 end

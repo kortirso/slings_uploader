@@ -2,7 +2,7 @@
 class Archive < ApplicationRecord
   belongs_to :vk_group
 
-  validates :vk_group_id, presence: true
+  validates :vk_group, presence: true
 
   def set?
     identifier.present?

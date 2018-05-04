@@ -12,22 +12,22 @@
         .row
           .col-sm-12.col-md-6
             h2 Настройка группы Вконтакте
-            = form_for vk_group, url: vk_group_path(vk_group), method: :patch do |f|
+            = form_with model: vk_group, url: vk_group_path(vk_group), method: :patch, local: true do |f|
               .form-group
-                = label_tag 'vk_group_group_id', 'Идентификатор группы ВК'
-                = f.text_field :group_id, placeholder: 'Идентификатор группы', class: 'form-control'
+                = label_tag 'vk_group_identifier', 'Идентификатор группы ВК'
+                = f.text_field :identifier, placeholder: 'Идентификатор группы', class: 'form-control'
               p Добавить/Редактировать альбомы
               .albums.form-group
                 = f.fields_for :albums do |y|
                   .row.album.form-group
-                    .col-sm-6= y.text_field :album_name, placeholder: 'Название альбома', class: 'form-control'
-                    .col-sm-6= y.text_field :album_id, placeholder: 'Идентификатор альбома', class: 'form-control'
+                    .col-sm-6= y.text_field :name, placeholder: 'Название альбома', class: 'form-control'
+                    .col-sm-6= y.text_field :identifier, placeholder: 'Идентификатор альбома', class: 'form-control'
                 = link_to 'Добавить альбом', '', class: 'duplicate_album btn btn-primary'
               .archive_album
                 = f.fields_for :archive do |y|
                   .form-group
-                    = label_tag 'vk_group_archive_attributes_album_id', 'Редактировать архивный альбом'
-                    = y.text_field :album_id, placeholder: 'Идентификатор архивного альбома', value: vk_group.archive.album_id, class: 'form-control'
+                    = label_tag 'vk_group_archive_attributes_identifier', 'Редактировать архивный альбом'
+                    = y.text_field :identifier, placeholder: 'Идентификатор архивного альбома', value: vk_group.archive.identifier, class: 'form-control'
               p= f.submit 'Сохранить', class: 'btn btn-primary'
           .col-sm-12.col-md-6
             h2 Массовая публикация товаров
