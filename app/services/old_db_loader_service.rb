@@ -9,6 +9,7 @@ class OldDbLoaderService
     products_loading
     publishes_loading
     attachments_loading
+    attachments
   end
 
   private def categories_loading
@@ -63,6 +64,14 @@ class OldDbLoaderService
     JSON.parse(JSON.parse(File.read("#{Rails.root}/db/old_db/attachments_published.json"))).each do |attachment|
       publish = Publish.find_by(old_id: attachment['publish_id'])
       publish.update(vk_photo_identifier: attachment['photo_id']) if publish.present?
+    end
+  end
+
+  private def attachments
+    JSON.parse(JSON.parse(File.read("#{Rails.root}/db/old_db/attachments_base.json"))).each do |attachment|
+      product = Product.find_by(old_id: attachment['product_id'])
+      filename = "#{Rails.root}#{attachment['image']['url']}"
+      product.image.attach(io: File.open(filename), filename: filename.split('/')[-1])
     end
   end
 end
