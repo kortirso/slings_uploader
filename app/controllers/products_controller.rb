@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: %i[create update mass_inserting upload_all_db marketing destroy]
+  skip_before_action :verify_authenticity_token, only: %i[create update mass_inserting marketing destroy]
   before_action :select_categories, only: %i[show]
   before_action :check_admin_role, except: %i[show mass_inserting marketing]
   before_action :find_product, only: %i[show edit update destroy]
@@ -40,11 +40,6 @@ class ProductsController < ApplicationController
     if current_user.with_albums?
       CatalogPublishingJob.perform_later(user: current_user)
     end
-  end
-
-  def upload_all_db
-    CatalogUploadingJob.perform_later(user: current_user, category: params[:category])
-    redirect_to categories_path
   end
 
   def marketing

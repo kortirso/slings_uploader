@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :products, except: %i[index] do
     resources :publishes, only: %i[show create update destroy]
     post :mass_inserting, on: :collection
-    post :upload_all_db, on: :collection
     post :marketing, on: :collection
   end
   resources :vk_groups, only: :update
