@@ -9,7 +9,7 @@ class PublishesController < ApplicationController
   end
 
   def create
-    publish = Publish.new product: @product, user: current_user
+    publish = Publish.new(product: @product, user: current_user)
     if publish.save
       redirect_to product_publish_path(@product, publish)
     else

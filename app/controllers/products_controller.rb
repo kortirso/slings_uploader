@@ -1,16 +1,15 @@
 class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[create update mass_inserting upload_all_db marketing destroy]
-  before_action :select_categories, only: :show
+  before_action :select_categories, only: %i[show]
   before_action :check_admin_role, except: %i[show mass_inserting marketing]
   before_action :find_product, only: %i[show edit update destroy]
+  before_action :select_categories_names, only: %i[new edit]
 
   def show
     @publish = @product.publishes.find_by(user_id: current_user.id)
   end
 
-  def new
-    @categories = Category.list
-  end
+  def new; end
 
   def create
     product = Product.new(product_params)
@@ -21,9 +20,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-    @categories = Category.list
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
@@ -41,9 +38,6 @@ class ProductsController < ApplicationController
   def mass_inserting
     if current_user.with_albums?
       CatalogPublishingJob.perform_later(user: current_user)
-      render :inserting_true
-    else
-      render :inserting_false
     end
   end
 
@@ -54,7 +48,6 @@ class ProductsController < ApplicationController
 
   def marketing
     CatalogMarketingJob.perform_later(user: current_user)
-    render :marketing
   end
 
   private def find_product
@@ -64,5 +57,9 @@ class ProductsController < ApplicationController
 
   private def product_params
     params.require(:product).permit(:name, :caption, :price, :category_id, :image)
+  end
+
+  private def select_categories_names
+    @categories = Category.list
   end
 end

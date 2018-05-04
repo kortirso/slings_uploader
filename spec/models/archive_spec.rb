@@ -1,6 +1,6 @@
 RSpec.describe Archive, type: :model do
   it { should belong_to :vk_group }
-  it { should validate_presence_of :vk_group_id }
+  it { should validate_presence_of :vk_group }
 
   it 'should be valid' do
     archive = create :archive

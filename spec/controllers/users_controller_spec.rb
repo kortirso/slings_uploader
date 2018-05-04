@@ -1,6 +1,6 @@
 RSpec.describe UsersController, type: :controller do
   describe 'GET #index' do
-    it_behaves_like 'authorization'
+    it_behaves_like 'Check access'
 
     context 'for user' do
       sign_in_user

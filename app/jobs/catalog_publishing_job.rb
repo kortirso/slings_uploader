@@ -1,11 +1,11 @@
 class CatalogPublishingJob < ApplicationJob
   queue_as :default
 
-  def perform(params)
-    publishes = Product.create_publishes(params[:user])
+  def perform(args = {})
+    publishes = Product.create_publishes(args[:user])
 
     publishes.each do |publish|
-      result = PublishCreatingService.new(user: params[:user], publish: publish).publishing
+      result = PublishCreatingService.new(user: args[:user], publish: publish).publishing
       publish.destroy if result.nil?
     end
   end
