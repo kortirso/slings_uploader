@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :select_categories, only: %i[show]
   before_action :check_admin_role, except: %i[show mass_inserting marketing]
   before_action :find_product, only: %i[show edit update destroy]
+  before_action :find_category, only: %i[create]
   before_action :select_categories_names, only: %i[new edit]
 
   def show
@@ -12,8 +13,8 @@ class ProductsController < ApplicationController
   def new; end
 
   def create
-    product = Product.new(product_params)
-    if product.save
+    product = @category.products.new(product_params)
+    if product.save!
       redirect_to product
     else
       redirect_to new_product_path
@@ -55,8 +56,13 @@ class ProductsController < ApplicationController
     render_not_found if @product.nil?
   end
 
+  private def find_category
+    @category = Category.find_by(id: params[:product][:category_id])
+    redirect_to new_product_path if @category.nil?
+  end
+
   private def product_params
-    params.require(:product).permit(:name, :caption, :price, :category_id, :image)
+    params.require(:product).permit(:name, :caption, :price, :image)
   end
 
   private def select_categories_names
