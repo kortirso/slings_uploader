@@ -1,3 +1,4 @@
+# Documentation
 class CatalogUploadingJob < ApplicationJob
   queue_as :default
 

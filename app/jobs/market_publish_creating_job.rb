@@ -1,3 +1,4 @@
+# Documentation
 class MarketPublishCreatingJob < ApplicationJob
   queue_as :default
 

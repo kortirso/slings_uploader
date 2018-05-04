@@ -1,3 +1,4 @@
+# Documentation
 class CatalogMarketingJob < ApplicationJob
   queue_as :default
 

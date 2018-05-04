@@ -1,3 +1,4 @@
+# Documentation
 class SitePublishCreatingJob < ApplicationJob
   queue_as :default
 
