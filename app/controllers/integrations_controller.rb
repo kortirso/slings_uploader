@@ -1,5 +1,5 @@
 class IntegrationsController < ApplicationController
-  before_action :check_user, only: :show
+  before_action :check_user, only: %[show]
 
   def show
     @vk_group = current_user.vk_group

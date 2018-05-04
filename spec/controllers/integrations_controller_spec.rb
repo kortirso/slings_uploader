@@ -1,21 +1,4 @@
-RSpec.describe CategoriesController, type: :controller do
-  describe 'GET #index' do
-    it_behaves_like 'Check access'
-
-    context 'for logged user' do
-      sign_in_user
-      before { get :index }
-
-      it 'renders index page' do
-        expect(response).to render_template :index
-      end
-    end
-
-    def do_request
-      get :index
-    end
-  end
-
+RSpec.describe IntegrationsController, type: :controller do
   describe 'GET #show' do
     it_behaves_like 'Check access'
 
@@ -31,8 +14,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       context 'if category exists' do
-        let!(:category) { create :category }
-        before { get :show, params: { id: category.id } }
+        before { get :show, params: { id: @current_user.id } }
 
         it 'renders show page' do
           expect(response).to render_template :show
