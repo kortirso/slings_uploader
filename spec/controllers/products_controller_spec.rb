@@ -119,7 +119,8 @@ RSpec.describe ProductsController, type: :controller do
         sign_in_admin
 
         context 'for invalid params' do
-          let(:request) { post :create, params: { product: { name: '', category: nil, price: 0 } } }
+          let!(:category) { create :category }
+          let(:request) { post :create, params: { product: { name: '', category: category.id, price: -1 } } }
 
           it 'does not create new product' do
             expect { request }.to_not change(Product, :count)
@@ -300,7 +301,7 @@ RSpec.describe ProductsController, type: :controller do
         it 'does not call perform for CatalogPublishingJob' do
           expect(CatalogPublishingJob).to_not receive(:perform_later)
 
-          post :mass_inserting
+          post :mass_inserting, params: { format: :js }
         end
       end
 
@@ -312,13 +313,31 @@ RSpec.describe ProductsController, type: :controller do
         it 'calls perform for CatalogPublishingJob' do
           expect(CatalogPublishingJob).to receive(:perform_later)
 
-          post :mass_inserting
+          post :mass_inserting, params: { format: :js }
         end
       end
     end
 
     def do_request
-      post :mass_inserting
+      post :mass_inserting, params: { format: :js }
+    end
+  end
+
+  describe 'POST #marketing' do
+    it_behaves_like 'Check access'
+
+    context 'for logged user' do
+      sign_in_user
+
+      it 'calls perform for CatalogMarketingJob' do
+        expect(CatalogMarketingJob).to receive(:perform_later)
+
+        post :marketing, params: { format: :js }
+      end
+    end
+
+    def do_request
+      post :marketing, params: { format: :js }
     end
   end
 end
