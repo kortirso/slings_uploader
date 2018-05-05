@@ -59,6 +59,9 @@ gem 'kaminari'
 # Admin panel
 gem 'rails_admin', '1.3.0'
 
+# VKontakte API
+gem 'vk_api_simple'
+
 group :development do
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
