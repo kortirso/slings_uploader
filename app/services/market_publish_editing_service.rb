@@ -33,6 +33,6 @@ class MarketPublishEditingService
   end
 
   private def edit_product_in_market
-    response = VK::Market::EditService.call(token: user.token, owner_id: user.vk_group.group_id, item_id: publish.market_item_id, description: publish.caption, name: publish.name, category_id: CATEGORY_ID, price: publish.price, main_photo_id: main_photo_id)
+    VK::Market::EditService.call(token: user.token, owner_id: user.vk_group.group_id, item_id: publish.market_item_id, description: publish.caption, name: publish.name, category_id: CATEGORY_ID, price: publish.price, main_photo_id: main_photo_id)
   end
 end

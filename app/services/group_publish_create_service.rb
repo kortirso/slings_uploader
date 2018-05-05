@@ -1,11 +1,10 @@
 # Create publishes in VK
 class GroupPublishCreateService
-  attr_reader :user, :publish, :photo_source
+  attr_reader :user, :publish
 
   def initialize(args = {})
     @user = args[:user]
     @publish = args[:publish]
-    @photo_source = publish.product.image_source
   end
 
   def publishing
@@ -20,7 +19,7 @@ class GroupPublishCreateService
   end
 
   private def upload_hash
-    @upload_hash ||= VK::Photos::UploadImageService.call(upload_url: upload_url, image_content: photo_source, temp_name: "#{user.id}-#{publish.id}.jpg")
+    @upload_hash ||= VK::Photos::UploadImageService.call(upload_url: upload_url, image_content: publish.product.image_source, temp_name: "#{user.id}-#{publish.id}.jpg")
   end
 
   private def save_image

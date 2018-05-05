@@ -298,8 +298,8 @@ RSpec.describe ProductsController, type: :controller do
       sign_in_user
 
       context 'for invalid params' do
-        it 'does not call perform for CatalogPublishingJob' do
-          expect(CatalogPublishingJob).to_not receive(:perform_later)
+        it 'does not call perform for GroupPublishesCreateJob' do
+          expect(GroupPublishesCreateJob).to_not receive(:perform_later)
 
           post :mass_inserting, params: { format: :js }
         end
@@ -310,8 +310,8 @@ RSpec.describe ProductsController, type: :controller do
         let!(:album2) { create :album, name: 'Коллекция Весна-Лето', vk_group: @current_user.vk_group }
         let!(:album3) { create :album, name: 'Коллекция Остатки сладки', vk_group: @current_user.vk_group }
 
-        it 'calls perform for CatalogPublishingJob' do
-          expect(CatalogPublishingJob).to receive(:perform_later)
+        it 'calls perform for GroupPublishesCreateJob' do
+          expect(GroupPublishesCreateJob).to receive(:perform_later)
 
           post :mass_inserting, params: { format: :js }
         end
