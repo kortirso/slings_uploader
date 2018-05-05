@@ -20,6 +20,10 @@ class Publish < ApplicationRecord
     user.albums.find_by(identifier: vk_item)
   end
 
+  def complete(identifier)
+    update(published: true, vk_photo_identifier: identifier)
+  end
+
   private def fill_publish
     update(name: product.name, caption: product.caption, price: product.price)
   end
