@@ -47,6 +47,11 @@ class Product < ApplicationRecord
     rails_blob_url(image, disposition: 'attachment', only_path: true)
   end
 
+  def image_source
+    return '' unless image.attached?
+    image.attachment.blob.download
+  end
+
   def slug_candidates
     [:name, [:name, :id]]
   end

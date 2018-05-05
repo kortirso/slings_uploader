@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
 
   def mass_inserting
     if current_user.with_albums?
-      CatalogPublishingJob.perform_later(user: current_user)
+      GroupPublishesCreateJob.perform_later(user: current_user)
     end
   end
 
