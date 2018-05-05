@@ -7,7 +7,7 @@ RSpec.describe GroupPublishesCreateJob, type: :job do
   let!(:product) { create :product, category: category }
 
   it 'executes method publish of GroupPublishCreateService' do
-    expect_any_instance_of(GroupPublishCreateService).to receive(:publish)
+    expect_any_instance_of(GroupPublishCreateService).to receive(:publishing)
 
     GroupPublishesCreateJob.perform_now(user: user)
   end
@@ -21,7 +21,7 @@ RSpec.describe GroupPublishesCreateJob, type: :job do
 
     it 'and returns array of publishes' do
       result = GroupPublishesCreateJob.new.send(:publishes, user)
-      
+
       expect(result.is_a?(Array)).to eq true
       expect(result[0].is_a?(Publish)).to eq true
     end

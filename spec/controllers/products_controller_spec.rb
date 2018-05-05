@@ -329,8 +329,8 @@ RSpec.describe ProductsController, type: :controller do
     context 'for logged user' do
       sign_in_user
 
-      it 'calls perform for CatalogMarketingJob' do
-        expect(CatalogMarketingJob).to receive(:perform_later)
+      it 'calls perform for MarketPublishesCreateJob' do
+        expect(MarketPublishesCreateJob).to receive(:perform_later)
 
         post :marketing, params: { format: :js }
       end

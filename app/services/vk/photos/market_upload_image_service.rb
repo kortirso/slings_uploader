@@ -4,8 +4,11 @@ module VK
   module Photos
     # docs
     class MarketUploadImageService
-      def self.call(params)
-        res = RestClient.post params[:upload_url], file: File.new("#{Rails.root}/public#{params[:image_path]}")
+      def self.call(args = {})
+        filename = "#{Rails.root}/tmp/#{args[:temp_name]}"
+        File.open(filename, 'wb') { |f| f.write(args[:image_content]) }
+        res = RestClient.post(args[:upload_url], file1: File.open(filename))
+        File.delete(filename)
         return false unless res.code == 200
         JSON.parse(res.body)
       end

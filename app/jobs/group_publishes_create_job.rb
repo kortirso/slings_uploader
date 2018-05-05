@@ -4,7 +4,7 @@ class GroupPublishesCreateJob < ApplicationJob
 
   def perform(args = {})
     publishes(args[:user]).each do |publish|
-      GroupPublishCreateService.new(user: args[:user], publish: publish).publish
+      GroupPublishCreateService.new(user: args[:user], publish: publish).publishing
     end
   end
 

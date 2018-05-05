@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
   end
 
   def marketing
-    CatalogMarketingJob.perform_later(user: current_user)
+    MarketPublishesCreateJob.perform_later(user: current_user)
   end
 
   private def find_product
