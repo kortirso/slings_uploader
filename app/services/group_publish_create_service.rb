@@ -1,10 +1,13 @@
+require 'vk_api_simple'
+
 # Create publishes in VK
 class GroupPublishCreateService
-  attr_reader :user, :publish
+  attr_reader :user, :publish, :client
 
   def initialize(args = {})
     @user = args[:user]
     @publish = args[:publish]
+    @client = VkApiSimple::Photos.new(token: user.token)
   end
 
   def publishing
@@ -15,15 +18,18 @@ class GroupPublishCreateService
   end
 
   private def upload_url
-    @upload_url ||= VK::Photos::GetUploadServerService.call(token: user.token, album_id: publish.vk_item, group_id: user.vk_group.identifier)['response']['upload_url']
+    @upload_url ||= client.get_upload_server(album_id: publish.vk_item, group_id: user.vk_group.identifier)['response']['upload_url']
   end
 
   private def upload_hash
-    @upload_hash ||= VK::Photos::UploadImageService.call(upload_url: upload_url, image_content: publish.product.image_source, temp_name: "#{user.id}-#{publish.id}.jpg")
+    filename = "#{Rails.root}/tmp/#{user.id}-#{publish.id}.jpg"
+    File.open(filename, 'wb') { |f| f.write(publish.product.image_source) }
+    @upload_hash ||= client.upload_image(url: upload_url, filename: filename)
+    File.delete(filename)
   end
 
   private def save_image
-    response = VK::Photos::SaveService.call(token: user.token, album_id: publish.vk_item, group_id: user.vk_group.identifier, caption: publish.caption, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash'])
+    response = client.save(album_id: publish.vk_item, group_id: user.vk_group.identifier, caption: publish.caption, server: upload_hash['server'], photos_list: upload_hash['photos_list'], hash: upload_hash['hash'])
     publish.update(published: true, vk_photo_identifier: response['response'][0]['id'])
   end
 
