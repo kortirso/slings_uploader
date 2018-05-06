@@ -1,10 +1,9 @@
 = render 'components/categories_navigation/categories_navigation', categories: @categories
 .block
-  h1 Товар
-.block
   .row
     .col-sm-12.col-lg-6
       .product_block
+        h2 Исходный товар
         h2.product_name.lined= product.name
         - if product.deleted?
           .product_deleted= 'ПРОДУКТ УДАЛЕН'
@@ -21,9 +20,9 @@
           p= link_to 'Удалить товар', product, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-primary'
     .col-sm-12.col-lg-6
       .publishes
-        h2 Публикации
+        h2 Публикация
         - if @publish.present?
-          .product_name.lined= @publish.name
+          h2.product_name.lined= @publish.name
           .product_image
             - if @publish.product_image.present?
               = image_tag @publish.product_image, class: 'img-fluid'
@@ -32,7 +31,7 @@
             - @publish.caption.each_line do |line|
               p= line
           .product_price.lined= "#{@publish.price} руб."
-          p= link_to 'Редактировать публикацию', product_publish_path(product, @publish), class: 'btn btn-primary'
-          = link_to 'Удалить публикацию', product_publish_path(@publish.product, @publish), method: :delete, data: { confirm: 'Товар будет удален из фотоальбома и товаров группы, Вы уверены?' }, class: 'btn btn-danger' if @publish.published? && current_user.vk_group.archive.set?
+          /p= link_to 'Редактировать публикацию', product_publish_path(product, @publish), class: 'btn btn-primary'
+          /= link_to 'Удалить публикацию', product_publish_path(@publish.product, @publish), method: :delete, data: { confirm: 'Товар будет удален из фотоальбома и товаров группы, Вы уверены?' }, class: 'btn btn-danger' if @publish.published? && current_user.vk_group.archive.set?
         - else
-          = link_to 'Подготовить публикацию', product_publishes_path(product), class: 'btn btn-primary', method: :post
+          /= link_to 'Подготовить публикацию', product_publishes_path(product), class: 'btn btn-primary', method: :post

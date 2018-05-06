@@ -11,25 +11,26 @@ class PublishesController < ApplicationController
   def create
     publish = Publish.new(product: @product, user: current_user)
     if publish.save
-      redirect_to product_publish_path(@product, publish)
+      # redirect_to product_publish_path(@product, publish)
+      redirect_to @product
     else
       redirect_to @product
     end
   end
 
   def update
-    PublishCreatingJob.perform_later(user: current_user, publish: @publish) if params[:to_vk].present? && @publish.update(publish_params)
-    MarketPublishCreatingJob.perform_later(user: current_user, publish: @publish) if params[:to_market].present?
-    SitePublishCreatingJob.perform_later(user: current_user, publish: @publish, album_id: publish_params[:album_id]) if params[:to_site].present?
-    redirect_to @publish.product
+    # PublishCreatingJob.perform_later(user: current_user, publish: @publish) if params[:to_vk].present? && @publish.update(publish_params)
+    # MarketPublishCreatingJob.perform_later(user: current_user, publish: @publish) if params[:to_market].present?
+    # SitePublishCreatingJob.perform_later(user: current_user, publish: @publish, album_id: publish_params[:album_id]) if params[:to_site].present?
+    # redirect_to @publish.product
   end
 
   def destroy
-    PublishDeletingService.new(user: current_user, publish: @publish).deleting if @publish.album_id.present?
-    MarketPublishDeletingService.new(user: current_user, publish: @publish).deleting if @publish.market_item_id.present?
-    SitePublishCreatingService.new(user: current_user, publish: @publish).destroy if @publish.site_item_id.present?
-    @publish.destroy
-    redirect_to @product
+    # PublishDeletingService.new(user: current_user, publish: @publish).deleting if @publish.album_id.present?
+    # MarketPublishDeletingService.new(user: current_user, publish: @publish).deleting if @publish.market_item_id.present?
+    # SitePublishCreatingService.new(user: current_user, publish: @publish).destroy if @publish.site_item_id.present?
+    # @publish.destroy
+    # redirect_to @product
   end
 
   private def find_product

@@ -1,6 +1,7 @@
 .block {
   box-shadow: 0 2px 6px 2px #ccc;
   padding: 15px;
+  margin: 15px 0;
 
   .button {
     margin: 0 10px 0 0;
