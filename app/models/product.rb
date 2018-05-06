@@ -2,7 +2,6 @@ require 'babosa'
 
 # Represents products
 class Product < ApplicationRecord
-  include Rails.application.routes.url_helpers
   extend FriendlyId
 
   friendly_id :slug_candidates, use: :slugged
@@ -40,11 +39,6 @@ class Product < ApplicationRecord
   def image_content
     return nil unless image.attached?
     image
-  end
-
-  def image_url
-    return nil unless image.attached?
-    rails_blob_url(image, disposition: 'attachment', only_path: true)
   end
 
   def image_source

@@ -1,5 +1,3 @@
-require 'vk_api_simple'
-
 # Create publishes in VK
 class GroupPublishCreateService
   attr_reader :user, :publish, :client, :filename
