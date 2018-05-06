@@ -2,13 +2,14 @@
 class MarketPublishCreateService
   CATEGORY_ID = 104
 
-  attr_reader :user, :publish, :auto, :client, :main_photo_id, :filename
+  attr_reader :user, :publish, :auto, :client, :market_client, :main_photo_id, :filename
 
   def initialize(args = {})
     @user = args[:user]
     @publish = args[:publish]
     @auto = args[:auto]
     @client = VkApiSimple::Photos.new(token: user.token)
+    @market_client = VkApiSimple::Market.new(token: user.token)
   end
 
   def publishing
@@ -30,12 +31,11 @@ class MarketPublishCreateService
   end
 
   private def save_image
-    response = client.save_market_photo(group_id: user.vk_group.identifier, server: upload_hash['server'], photo: upload_hash['photo'], hash: upload_hash['hash'], crop_data: upload_hash['crop_data'], crop_hash: upload_hash['crop_hash'])
-    @main_photo_id = response['response'][0]['id']
+    @main_photo_id = client.save_market_photo(group_id: user.vk_group.identifier, server: upload_hash['server'], photo: upload_hash['photo'], hash: upload_hash['hash'], crop_data: upload_hash['crop_data'], crop_hash: upload_hash['crop_hash'])['response'][0]['id']
   end
 
   private def add_product_to_market
-    response = VK::Market::AddService.call(token: user.token, owner_id: user.vk_group.identifier, description: publish.caption, name: name_for_publish, category_id: CATEGORY_ID, price: publish.price, main_photo_id: main_photo_id)
+    response = market_client.add(owner_id: user.vk_group.identifier, description: publish.caption, name: name_for_publish, category_id: CATEGORY_ID, price: publish.price, main_photo_id: main_photo_id)
     publish.update(market_item: response['response']['market_item_id'])
   end
 
