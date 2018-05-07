@@ -4,6 +4,6 @@
       = link_to product do
         .catalog_block class="#{'published' if @publishes.include? product.id}"
           .catalog_image
-            - if product.image.attached?
-              = image_tag(product.image)
+            - if product.image_content.present?
+              = ('<img src="data:image/jpg;base64,%s">' % product.image_content).html_safe
           = product.name.truncate(20)

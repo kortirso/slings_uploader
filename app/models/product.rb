@@ -38,7 +38,7 @@ class Product < ApplicationRecord
 
   def image_content
     return nil unless image.attached?
-    image
+    Base64.encode64(image.attachment.blob.download)
   end
 
   def image_source
