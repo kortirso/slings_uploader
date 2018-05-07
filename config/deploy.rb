@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.10.1'
+lock '3.10.2'
 
 set :application, 'slings_uploader'
 set :repo_url, 'git@github.com:kortirso/slings_uploader.git'
